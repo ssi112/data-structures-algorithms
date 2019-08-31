@@ -6,10 +6,12 @@
 # if you were bon 1 Jan 2012 and todays date is 2 Jan 2012 you are 1 day old.
 ###### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### ##### #####
 
-daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
+# not used but here for documentation or if needed
 months = ["January", "February", "March", "April", "May",
 "June", "July", "August", "September", "October", "November", "December"]
+
+daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 def isLeapYear(year):
     # returns True or False
@@ -17,9 +19,10 @@ def isLeapYear(year):
     return ((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0)
 
 
-# helpf functions
+# helper functions
 def nextDay(year, month, day):
-    """Simple version: assume every month has 30 days"""
+    """simple function to increment date to the next day
+        does not check for leap years - maybe it should"""
     if day < daysInMonths[month - 1]:
         return year, month, day + 1
     else:
@@ -44,14 +47,14 @@ def dateIsBefore(year1, month1, day1, year2, month2, day2):
 
 
 def daysBetweenDates(year1, month1, day1, year2, month2, day2):
+    """ Calculates the number of days between two dates.
+        Returns the number of days between year1/month1/day1
+        and year2/month2/day2. Assumes inputs are valid dates
+        in Gregorian calendar, and the first date is not after
+        the second.
+
+        Accounts for leap years if month is February
     """
-    Calculates the number of days between two dates.
-    """
-    """Returns the number of days between year1/month1/day1
-       and year2/month2/day2. Assumes inputs are valid dates
-       in Gregorian calendar, and the first date is not after
-       the second."""
-    # YOUR CODE HERE!
     days = 0
     leapYearCounted = False
 
@@ -90,13 +93,17 @@ def testDaysBetweenDates():
     print("Congratulations! Your daysBetweenDates")
     print("function is working correctly!")
 
-# testDaysBetweenDates()
 
 def test():
     test_cases = [((2012,9,30, 2012,10,30) ,30),
                   ((2012,1,1, 2013,1,1) ,366),
                   ((2012,9,1, 2012,9,4) ,3),
-                  ((2013,1,1, 1999,12,31), "AssertionError")]
+                  ((2013,1,1, 1999,12,31), "AssertionError"),
+                  ((2017, 12, 30, 2017, 12, 30), 0),
+                  ((2017, 12, 30,  2017, 12, 31), 1),
+                  ((2017, 12, 30,  2018, 1,  1), 2),
+                  ((2012, 6, 29, 2013, 6, 29), 365),
+                  ((2012, 12, 8, 2012, 12, 7), "AssertionError")]
 
     for (args, answer) in test_cases:
         try:
@@ -120,7 +127,7 @@ def main():
     # print(isLeapYear(2064)) # true
     print( daysBetweenDates(2013,1,24, 2013,6,29) )
     print( daysBetweenDates(1912,12,12, 2012,12,12) )
-    # print( daysBetweenDates(2013,1,24, 2012,12,20) )
+    print( daysBetweenDates(1932,2,29, 1932,2,29) )
     test()
 
 if __name__ == '__main__':
