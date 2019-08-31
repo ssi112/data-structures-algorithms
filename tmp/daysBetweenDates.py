@@ -13,17 +13,26 @@ months = ["January", "February", "March", "April", "May",
 
 daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
+# helper functions
+# check for leap year
 def isLeapYear(year):
     # returns True or False
     # https://en.wikipedia.org/wiki/Leap_year#Algorithm
     return ((year % 4 == 0) and (year % 100 != 0)) or (year % 400 == 0)
 
 
-# helper functions
+# returns the number of days in the month
+def daysInMonth(year, month):
+    if (isLeapYear(year) and month == 2):
+        return 29
+    else:
+        return daysInMonths[month - 1]
+
+
 def nextDay(year, month, day):
     """simple function to increment date to the next day
-        does not check for leap years - maybe it should"""
-    if day < daysInMonths[month - 1]:
+    """
+    if day < daysInMonth(year, month):
         return year, month, day + 1
     else:
         if month == 12:
@@ -56,7 +65,6 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
         Accounts for leap years if month is February
     """
     days = 0
-    leapYearCounted = False
 
     assert not dateIsBefore(year2, month2, day2, year1, month1, day1) == True
 
@@ -67,31 +75,7 @@ def daysBetweenDates(year1, month1, day1, year2, month2, day2):
     while dateIsBefore(year1, month1, day1, year2, month2, day2):
         year1, month1, day1 = nextDay(year1, month1, day1)
         days += 1
-        if (isLeapYear(year1) and month1 == 2):
-            if not leapYearCounted:
-                days += 1
-                leapYearCounted = True
-        else:
-            leapYearCounted = False
-    # print(year1, month1, day1)
-    # print(days)
     return days
-
-
-def testDaysBetweenDates():
-    # test same day
-    assert(daysBetweenDates(2017, 12, 30, 2017, 12, 30) == 0)
-    # test adjacent days
-    assert(daysBetweenDates(2017, 12, 30,  2017, 12, 31) == 1)
-    # test new year
-    assert(daysBetweenDates(2017, 12, 30,  2018, 1,  1)  == 2)
-    # test full year difference
-    assert(daysBetweenDates(2012, 6, 29, 2013, 6, 29)  == 365)
-    # Second date must be equal to or occur after first date
-    assert(daysBetweenDates(2012, 12, 8, 2012, 12, 7)  == Undefined)
-
-    print("Congratulations! Your daysBetweenDates")
-    print("function is working correctly!")
 
 
 def test():
@@ -103,7 +87,8 @@ def test():
                   ((2017, 12, 30,  2017, 12, 31), 1),
                   ((2017, 12, 30,  2018, 1,  1), 2),
                   ((2012, 6, 29, 2013, 6, 29), 365),
-                  ((2012, 12, 8, 2012, 12, 7), "AssertionError")]
+                  ((2012, 12, 8, 2012, 12, 7), "AssertionError"),
+                  ((2012, 1, 1, 2012, 2, 28), 58)]
 
     for (args, answer) in test_cases:
         try:
