@@ -104,5 +104,70 @@ return days
 
 For the above a procedure is needed to figure out the next day (day after date1)
 
+Write small bits of code and _test_ them. Know what each part does and how it fits into solving the problem.
+
+#### Step-wise Refinement
+Below is a simple procedure that is _partially_ correct.
+```
+# Define a daysBetweenDates procedure that would produce the
+# correct output if there was a correct nextDay procedure.
+#
+# Note that this will NOT produce correct outputs yet, since
+# our nextDay procedure assumes all months have 30 days
+# (hence a year is 360 days, instead of 365).
+# 
+
+def nextDay(year, month, day):
+    """Simple version: assume every month has 30 days"""
+    if day < 30:
+        return year, month, day + 1
+    else:
+        if month == 12:
+            return year + 1, 1, 1
+        else:
+            return year, month + 1, 1
+        
+def daysBetweenDates(year1, month1, day1, year2, month2, day2):
+    """Returns the number of days between year1/month1/day1
+       and year2/month2/day2. Assumes inputs are valid dates
+       in Gregorian calendar, and the first date is not after
+       the second."""
+    # YOUR CODE HERE!
+    days = 0
+    while ((year1 != year2) or (month1 != month2) or (day1 != day2)):
+        year1, month1, day1 = nextDay(year1, month1, day1)
+        days += 1
+    # print(year1, month1, day1)
+    # print(days)
+    return days
+
+def test():
+    test_cases = [((2012,9,30,2012,10,30),30), 
+                  ((2012,1,1,2013,1,1),360),
+                  ((2012,9,1,2012,9,4),3)]
+    
+    for (args, answer) in test_cases:
+        result = daysBetweenDates(*args)
+        if result != answer:
+            print "Test with data:", args, "failed"
+        else:
+            print "Test case passed!"
+
+test()
+
+# output:
+Test case passed!
+Test case passed!
+Test case passed!
+```
+
+**&checkmark; So far with the solution to the problem broken into three parts:**
+
+1. Step One Pseudocode
+2. Step Two Helper Function(s)
+3. Step Three daysBetweenDates
+
+**&#x261B; Write small bits of code and test so the problem is solved incrementally**
+
 
 
