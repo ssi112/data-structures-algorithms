@@ -86,10 +86,10 @@ while year 1 < year 2
 	days = days + days in year1
 ```
 
-OOPS!
-Doesn't handle input dates in same month
-Doesn't handle cases where month2 < month1, but year2 is > year1
-Need to check for leap years
+OOPS! <br />
+Doesn't handle input dates in same month <br />
+Doesn't handle cases where month2 < month1, but year2 is > year1 <br />
+Need to check for leap years <br />
 
 Is there a simpler method?
 
