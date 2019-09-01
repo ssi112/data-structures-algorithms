@@ -1,3 +1,5 @@
 # .gitignore
+*.pdf
+tmp/.ipynb_checkpoints
 
 

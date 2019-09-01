@@ -169,5 +169,19 @@ Test case passed!
 
 **&#x261B; Write small bits of code and test so the problem is solved incrementally**
 
+<hr /> 
+
+This focused on solving the problem and how to get a working version of the days between dates, but left efficiency out of the equation. In the steps outlined above and repeated below we stopped at step 4) and put off efficiency. Efficiency being the amount of time it takes to run the program and the amount of space (memory) required. 
+
+These are the problem solving steps used:
+
+1. What are the inputs?
+2. What are the outputs?
+3. Work through some examples by hand
+4. Try a simple mechanical solution
+5. Don't optimize prematurely - keep it simple and correct!
+
+
+**A correct working version is in tmp/daysBetweenDates.py**
 
 
