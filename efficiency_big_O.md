@@ -18,7 +18,7 @@ As the input increases, the number of lines executed increases by a _proportiona
 
 **Quadratic Rate of Increase**
 
-When the input goes up by a certain amount, the number of operations goes up by the square of that amount. If the input is 2, the number of operations is 2^2 ^or 4. If the input is 3, the number of operations is 3^2 or 9.
+When the input goes up by a certain amount, the number of operations goes up by the square of that amount. If the input is 2, the number of operations is 2^2 or 4. If the input is 3, the number of operations is 3^2 or 9.
 
 Simple Example:
 ```
@@ -37,6 +37,7 @@ The _order_ or _rate of increase_ is important when designing algorithms.
 The O in Big O Notation refers to the **o**rder of the rate of increase.
 
 <hr />
+
 #### Big O Notation
 
 Big O notation is used to describe the _order_, or _rate of increase_, in the run-time of an algorithm, in terms of the input size (n).

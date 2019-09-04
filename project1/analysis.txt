@@ -1,0 +1,24 @@
+Calculate Big O
+
+Once you have completed your solution for each problem, perform a run time analysis (Worst Case Big-O Notation) of your solution. Document this for each problem and include this in your submission.
+
+------------------------------------------
+TASK0
+
+Functions readTexts() and readCalls()
+
+Not certain how Python csv.reader function works since this is a builtin method. If it takes each line of the file, assumed as it is provided a delimiter, then it would be a linear function. The for loop to append each line to a list is linear O(n) as it is dependent on the size of the input.
+
+The main function splits the first list item and the last list item into component parts. These should be O(1). The split of the calls list uses len, which is also O(1).
+
+------------------------------------------
+TASK1
+
+Functions readTexts() and readCalls()
+
+Same as Task0
+
+------------------------------------------
+TASK2
+
+

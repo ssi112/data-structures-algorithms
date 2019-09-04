@@ -36,8 +36,8 @@ def main():
     textSplit = []
     callsSplit = []
 
-    textSplit = texts[0][0].split(',') # split first line texts
-    callsSplit = calls[len(calls)-1][0].split(',') # split last line in calls
+    textSplit = texts[0][0].split(',') # split first line of texts
+    callsSplit = calls[len(calls)-1][0].split(',') # split last line of calls
 
     # print(textSplit)
     # print(callsSplit)
