@@ -2,23 +2,47 @@ Calculate Big O
 
 Once you have completed your solution for each problem, perform a run time analysis (Worst Case Big-O Notation) of your solution. Document this for each problem and include this in your submission.
 
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK0
 
 Functions readTexts() and readCalls()
 
 Not certain how Python csv.reader function works since this is a builtin method. If it takes each line of the file, assumed as it is provided a delimiter, then it would be a linear function. The for loop to append each line to a list is linear O(n) as it is dependent on the size of the input.
 
-The main function splits the first list item and the last list item into component parts. These should be O(1). The split of the calls list uses len, which is also O(1).
+The main function splits the first list item and the last list item into component parts. These should be O(1) - constant time. The split of the calls list uses len, which is also O(1).
 
-------------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK1
 
 Functions readTexts() and readCalls()
-
 Same as Task0
 
+Finding the count of unique phone numbers:
+Uses two for loops. 1) to iterate through the list of lists. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the list items and determines whether it is unique and adds it to a new list. The second for loop should be linear O(n) as it too requires cycling through each element in the list.
+
+Determining whether items are unique and adding them to a unique data structure to obtain the count.
+
+Two methods were used: first method used 'if not in' logic and added them to a unique list of numbers. The second method used Python's set() .add method. Times analysis using time.process_time() shows that the set() method is faster.
+
+if not in   set() .add  difference
 ------------------------------------------
+0.08497222  0.00528440  0.07968782 run #1
+0.08446572  0.00524897  0.07921675 run #2
+0.08373243  0.00535645  0.07837598 run #3
+------------------------------------------
+0.08439012  0.00529660  0.07909351 average
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK2
+
+Determining which telephone number spent the longest time on the phone:
+Again, uses two for loops. 1) to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the call list items. This second for loop should be linear O(n) as it too requires cycling through each element in the list. It examines each call length to determine if it is the maximum value and stores it in variables if it is. These should require O(1) to execute.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TASK3
+
+
 
 
