@@ -7,7 +7,7 @@ TASK0
 
 Functions readTexts() and readCalls()
 
-Not certain how Python csv.reader function works since this is a builtin method. If it takes each line of the file, assumed as it is provided a delimiter, then it would be a linear function. The for loop to append each line to a list is linear O(n) as it is dependent on the size of the input.
+Not certain how Python csv.reader function works since this is a builtin method. If it takes each line of the file, assumed as it is provided a delimiter, then it would be a linear function. The for loop to append each line to a list is linear O(n) as it is dependent on the size of the input. As there are two files to import combined they would be O(2n).
 
 The main function splits the first list item and the last list item into component parts. These should be O(1) - constant time. The split of the calls list uses len, which is also O(1).
 
@@ -37,7 +37,7 @@ if not in   set() .add  difference
 TASK2
 
 Determining which telephone number spent the longest time on the phone:
-Again, uses two for loops. 1) to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the call list items. This second for loop should be linear O(n) as it too requires cycling through each element in the list. It examines each call length to determine if it is the maximum value and stores it in variables if it is. These should require O(1) to execute.
+Again, uses two for loops. 1) to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the call list items. This second for loop should be linear O(n) as it too requires cycling through each element in the list. Also, during the second iteration it examines the value to build a dictionary; appending key-value pairs if not found otherwise updating the value to total call duration. It then examines each call length to determine if it is the maximum value and stores it in variables if it is - requiring O(n).
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

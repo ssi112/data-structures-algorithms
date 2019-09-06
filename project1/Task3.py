@@ -46,3 +46,10 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+"""
+iterate through the list of calls
+check if areaCode "080" is in the list
+if "080" then add to new list if it doesn't already exist in that list
+Results in a list of all 080 code numbers
+"""
