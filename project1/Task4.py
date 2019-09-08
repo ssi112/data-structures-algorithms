@@ -3,14 +3,28 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files.
 """
 import csv
+import time
 
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
+texts = list()
+calls = list()
 
-with open('calls.csv', 'r') as f:
-    reader = csv.reader(f)
-    calls = list(reader)
+"""
+Read file into texts and calls.
+"""
+def readTexts():
+    with open('texts.csv', 'r') as f:
+        reader = csv.reader(f, delimiter='\n')
+        for line in reader:
+            texts.append(line)
+
+
+def readCalls():
+    with open('calls.csv', 'r') as f:
+        reader = csv.reader(f, delimiter='\n')
+        for line in reader:
+            calls.append(line)
+
+
 
 """
 TASK 4:
