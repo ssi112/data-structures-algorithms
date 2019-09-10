@@ -15,17 +15,17 @@ calls = list()
 Read file into texts and calls.
 """
 def readTexts():
+    global texts
     with open('texts.csv', 'r') as f:
-        reader = csv.reader(f, delimiter='\n')
-        for line in reader:
-            texts.append(line)
+        reader = csv.reader(f)
+        texts = list(reader)
 
 
 def readCalls():
+    global calls
     with open('calls.csv', 'r') as f:
-        reader = csv.reader(f, delimiter='\n')
-        for line in reader:
-            calls.append(line)
+        reader = csv.reader(f)
+        calls = list(reader)
 
 
 def calls_area_code(area_code, tele_count_calls):
@@ -41,23 +41,21 @@ def calls_area_code(area_code, tele_count_calls):
     codes_called = set()    # unique list of codes called
 
     for callDetail in calls:
-        for call in callDetail:
-            callSplit = call.split(',')
-            if (callSplit[0].find(area_code, 1, 4) != -1):
-                # add new item to dict if calling # does not exist
-                if callSplit[0] not in tele_count_calls:
-                    tele_count_calls[callSplit[0]]= [1, 0]
-                    # is receiving call in same area code
-                    if (callSplit[1].find(area_code, 1, 4) != -1):
-                        tele_count_calls[callSplit[0]][1] = 1
-                # otherwise increase the call count
-                else:
-                    tele_count_calls[callSplit[0]][0] += 1
-                    # is receiving call in same area code
-                    if (callSplit[1].find(area_code, 1, 4) != -1):
-                        tele_count_calls[callSplit[0]][1] += 1
-                # create unique list of area codes called
-                codes_called.add( callSplit[1][1:4] )
+        if (callDetail[0].find(area_code, 1, 4) != -1):
+            # add new item to dict if calling # does not exist
+            if callDetail[0] not in tele_count_calls:
+                tele_count_calls[callDetail[0]]= [1, 0]
+                # is receiving call in same area code
+                if (callDetail[1].find(area_code, 1, 4) != -1):
+                    tele_count_calls[callDetail[0]][1] = 1
+            # otherwise increase the call count
+            else:
+                tele_count_calls[callDetail[0]][0] += 1
+                # is receiving call in same area code
+                if (callDetail[1].find(area_code, 1, 4) != -1):
+                    tele_count_calls[callDetail[0]][1] += 1
+            # create unique list of area codes called
+            codes_called.add( callDetail[1][1:4] )
     return sorted(codes_called)
 
 #results_dic[key].extend([classifier_label, truth])
@@ -123,7 +121,7 @@ def main():
     # print(len(sorted_codes_called))
 
     elapsed_time = time.process_time() - time_start
-    print("\nElapsed time {:4.8f}".format(elapsed_time))
+    #print("\nElapsed time {:4.8f}".format(elapsed_time))
 
     return 0
 

@@ -8,18 +8,21 @@ import time
 texts = list()
 calls = list()
 
+"""
+Read file into texts and calls.
+"""
 def readTexts():
+    global texts
     with open('texts.csv', 'r') as f:
-        reader = csv.reader(f, delimiter='\n')
-        for line in reader:
-            texts.append(line)
+        reader = csv.reader(f)
+        texts = list(reader)
 
 
 def readCalls():
+    global calls
     with open('calls.csv', 'r') as f:
-        reader = csv.reader(f, delimiter='\n')
-        for line in reader:
-            calls.append(line)
+        reader = csv.reader(f)
+        calls = list(reader)
 
 
 def uniqueListTest():
@@ -32,24 +35,20 @@ def uniqueListTest():
     uniqueTeleNumbers = []
     # calls
     for callDetail in calls:
-        for call in callDetail:
-            callSplit = call.split(',')
-            # calling tele number
-            if callSplit[0] not in uniqueTeleNumbers:
-                uniqueTeleNumbers.append(callSplit[0])
-            # receiving tele number
-            if callSplit[1] not in uniqueTeleNumbers:
-                uniqueTeleNumbers.append(callSplit[1])
+        # calling tele number
+        if callDetail[0] not in uniqueTeleNumbers:
+            uniqueTeleNumbers.append(callDetail[0])
+        # receiving tele number
+        if callDetail[1] not in uniqueTeleNumbers:
+            uniqueTeleNumbers.append(callDetail[1])
     # texts
     for textDetail in texts:
-        for text in textDetail:
-            textSplit = text.split(',')
-            # sending text tele number
-            if textSplit[0] not in uniqueTeleNumbers:
-                uniqueTeleNumbers.append(textSplit[0])
-            # receiving text tele number
-            if textSplit[1] not in uniqueTeleNumbers:
-                uniqueTeleNumbers.append(textSplit[1])
+        # sending text tele number
+        if textDetail[0] not in uniqueTeleNumbers:
+            uniqueTeleNumbers.append(textDetail[0])
+        # receiving text tele number
+        if textDetail[1] not in uniqueTeleNumbers:
+            uniqueTeleNumbers.append(textDetail[1])
     return len(uniqueTeleNumbers)
 
 
@@ -62,19 +61,15 @@ def uniqueSetTest():
     """
     unique = set()
     for callDetail in calls:
-        for call in callDetail:
-            callSplit = call.split(',')
-            # calling tele number
-            unique.add(callSplit[0])
-            # receiving tele number
-            unique.add(callSplit[1])
+        # calling tele number
+        unique.add(callDetail[0])
+        # receiving tele number
+        unique.add(callDetail[1])
     for textDetail in texts:
-        for text in textDetail:
-            textSplit = text.split(',')
-            # sending text tele number
-            unique.add(textSplit[0])
-            # receiving text tele number
-            unique.add(textSplit[1])
+        # sending text tele number
+        unique.add(textDetail[0])
+        # receiving text tele number
+        unique.add(textDetail[1])
     return len(unique)
 
 

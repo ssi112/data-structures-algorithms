@@ -18,31 +18,37 @@ Functions readTexts() and readCalls()
 Same as Task0
 
 Finding the count of unique phone numbers:
-Uses two for loops. 1) to iterate through the list of lists. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the list items and determines whether it is unique and adds it to a new list. The second for loop should be linear O(n) as it too requires cycling through each element in the list.
+Uses for loops to iterate through the list. This should be linear O(n) as it must read each element regardless of size.Then each list item is add to a set if it is unique.
 
 Determining whether items are unique and adding them to a unique data structure to obtain the count.
 
-Two methods were used: first method used 'if not in' logic and added them to a unique list of numbers. The second method used Python's set() .add method. Times analysis using time.process_time() shows that the set() method is faster.
+Two methods were used: first method used 'if not in' logic and added them to a unique list of numbers. The second method used Python's set() .add method: uniqueSetTest(). Times analysis using time.process_time() shows that the set() method is faster.
 
-if not in   set() .add  difference
+if not in   set() .add  difference  run #
 ------------------------------------------
-0.08497222  0.00528440  0.07968782 run #1
-0.08446572  0.00524897  0.07921675 run #2
-0.08373243  0.00535645  0.07837598 run #3
+0.08106893  0.00242071  0.07864822    1
+0.08740839  0.00237015  0.08503824    2
+0.08173945  0.00244544  0.07929401    3
 ------------------------------------------
-0.08439012  0.00529660  0.07909351 average
-
+0.08340559  0.00241210  0.08099349  average
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK2
 
 Determining which telephone number spent the longest time on the phone:
-Again, uses two for loops. 1) to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the call list items. This second for loop should be linear O(n) as it too requires cycling through each element in the list. Also, during the second iteration it examines the value to build a dictionary; appending key-value pairs if not found otherwise updating the value to total call duration. It then examines each call length to determine if it is the maximum value and stores it in variables if it is - requiring O(n).
+Uses two for loops. 1) to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size. 2) Second for loop splits the call list items. This second for loop should be linear O(n) as it too requires cycling through each element in the list. Also, during the second iteration it examines the value to build a dictionary; appending key-value pairs if not found otherwise updating the value to total call duration. It then examines each call length to determine if it is the maximum value and stores it in variables if it is - requiring O(n).
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK3
 
+Uses a for loop to iterate through the list of calls. This should be linear O(n) as it must read each element regardless of size.
+Finding the area codes involves string slicing. Since we are providing the starting and length to slice this should be O(1) - direct access to nth character in the string. Then doing a direct update to a dict with the counts: O(1). Then adding the unique area codes to a set and sorting it. Not sure what Python sort method is used, but concensus seems to be the sorted method would be O(nlog n) for worst case.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TASK4
+
+Builds multiple sets - requires two for loops and two union operations: O(len(s)+len(t)) according to Python Wiki TIme Complexity for the union operations. Uses x in s operation to find whether calling numbers are in the combined set: O(n) is worst case.
 
 
 
