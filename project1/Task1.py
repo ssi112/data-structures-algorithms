@@ -83,27 +83,10 @@ def main():
     readTexts()
     readCalls()
 
-    # info on process time
-    # https://docs.python.org/3/library/time.html#time.process_time
-    # slower - not used
     time_start = time.process_time()
-    #print("LIST:There are {} different telephone numbers in the records.".format(uniqueListTest()))
-    list_elapsed_time = time.process_time() - time_start
-    #print("Elapsed time {:4.8f}".format(list_elapsed_time))
-
-    # try using a python set
-    # yields the same results as using the if not in statement
-    # which is faster ???
-    # set is faster! removed code prior to submitting project
-    time_start = time.process_time()
-    print("SET:There are {} different telephone numbers in the records.".format(uniqueSetTest()))
+    print("There are {} different telephone numbers in the records.".format(uniqueSetTest()))
     set_elapsed_time = time.process_time() - time_start
-    #print("Elapsed time {:4.8f}".format(set_elapsed_time))
 
-    #if list_elapsed_time > set_elapsed_time:
-    #    print("It took the list method {:4.8f} seconds longer.".format(list_elapsed_time - set_elapsed_time))
-    #else:
-    #   print("It took the set method {:4.8f} seconds longer.".format(set_elapsed_time - list_elapsed_time))
 
 if __name__ == '__main__':
     main()

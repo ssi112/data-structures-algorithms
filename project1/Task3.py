@@ -101,6 +101,13 @@ def main():
 
     sorted_codes_called = calls_area_code("080", tele_count_calls)
 
+    print("\n")
+    print("="*53)
+    print("The numbers called by people in Bangalore have codes:")
+    for val in sorted_codes_called:
+        print(val)
+    # print(len(sorted_codes_called))
+
     sum_cnt_calls = 0
     sum_cnt_same_area_code = 0
 
@@ -109,16 +116,8 @@ def main():
         sum_cnt_calls += value[0]
         sum_cnt_same_area_code += value[1]
     print("\n")
-    print("="*53)
-    print("sum_cnt_calls={:,} | sum_cnt_same_area_code={:,}".format(sum_cnt_calls, sum_cnt_same_area_code) )
+    #print("sum_cnt_calls={:,} | sum_cnt_same_area_code={:,}".format(sum_cnt_calls, sum_cnt_same_area_code) )
     print("{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(sum_cnt_same_area_code / sum_cnt_calls * 100))
-
-    print("\n")
-    print("="*53)
-    print("The numbers called by people in Bangalore have codes:")
-    for val in sorted_codes_called:
-        print(val)
-    # print(len(sorted_codes_called))
 
     elapsed_time = time.process_time() - time_start
     #print("\nElapsed time {:4.8f}".format(elapsed_time))
