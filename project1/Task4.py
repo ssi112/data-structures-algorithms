@@ -107,28 +107,28 @@ def main():
 
     buildSets()
 
-    #print("="*55)
-    #print("receivingCallNumber len: ", len(receivingCallNumber))
+    print("="*55)
+    print("receivingCallNumber len: ", len(receivingCallNumber))
     #for val in sorted(receivingCallNumber):
     #    print(val)
 
-    #print("="*55)
-    #print("sendingTxtNumber len: ", len(sendingTxtNumber))
+    print("="*55)
+    print("sendingTxtNumber len: ", len(sendingTxtNumber))
     #for val in sorted(sendingTxtNumber):
     #    print(val)
 
-    #print("="*55)
-    #print("receivingTxtNumber len: ", len(receivingTxtNumber))
+    print("="*55)
+    print("receivingTxtNumber len: ", len(receivingTxtNumber))
     #for val in sorted(receivingTxtNumber):
     #    print(val)
 
     # creates list of numbers making outgoing calls
     uniqueCallNumbers()
-    #print("="*55)
-    #print("callingList len: ", len(callingList))
+    print("="*55)
+    print("callingList len: ", len(callingList))
 
     outgoingNumbers = outGoingCallsOnly()
-    # print("outgoingNumbers len (after): ", len(outgoingNumbers))
+    print("outgoingNumbers len (after): ", len(outgoingNumbers))
     print("\nThese numbers could be telemarketers: ")
     for val in outgoingNumbers:
         print(val)
