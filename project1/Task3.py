@@ -54,11 +54,23 @@ def calls_area_code(area_code, tele_count_calls):
                 # is receiving call in same area code
                 if (callDetail[1].find(area_code, 1, 4) != -1):
                     tele_count_calls[callDetail[0]][1] += 1
-            # create unique list of area codes called
-            codes_called.add( callDetail[1][1:4] )
+            """
+            Fixed-line number - enclosed within brackets so check for opening bracket
+            Telemarkets numbers - always start with 140 and area code is also 140
+            Mobile number - always start with 9, 8 or 7 and the area code is up to 4 digits.
+                We can fetch it directly like num[0:4].
+            Then create unique list of area codes called
+            """
+            check_code = callDetail[1][0:4]
+            if check_code[0:3] == "140":  # Telemarketers
+                codes_called.add("140")
+            if check_code[0] == "(":    # fixed line number
+                codes_called.add(check_code[1:4])
+            if check_code[0] in ['7','8','9']:
+                codes_called.add(check_code[0:4])
+            # codes_called.add( callDetail[1][1:4] ) # original method
     return sorted(codes_called)
 
-#results_dic[key].extend([classifier_label, truth])
 
 def main():
     """
@@ -116,7 +128,7 @@ def main():
         sum_cnt_calls += value[0]
         sum_cnt_same_area_code += value[1]
     print("\n")
-    #print("sum_cnt_calls={:,} | sum_cnt_same_area_code={:,}".format(sum_cnt_calls, sum_cnt_same_area_code) )
+    # print("sum_cnt_calls={:,} | sum_cnt_same_area_code={:,}".format(sum_cnt_calls, sum_cnt_same_area_code) )
     print("{:.2f} percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(sum_cnt_same_area_code / sum_cnt_calls * 100))
 
     elapsed_time = time.process_time() - time_start

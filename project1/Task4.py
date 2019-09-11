@@ -82,7 +82,7 @@ def uniqueCallNumbers():
 
 
 # Cannot iterate over a list and update it in place
-# indexes change after an item is removed !!!
+# indexes change after an item is removed - DOH!!!
 # https://stackoverflow.com/questions/52941953/python-delete-from-list-while-iterating
 def outGoingCallsOnly():
     global allNumbersToCheck

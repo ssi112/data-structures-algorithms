@@ -48,7 +48,7 @@ Finding the area codes involves string slicing. Since we are providing the start
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 TASK4
 
-Builds multiple sets - requires two for loops and two union operations: O(len(s)+len(t)) according to Python Wiki TIme Complexity for the union operations. Uses x in s operation to find whether calling numbers are in the combined set: O(n) is worst case.
+Builds multiple sets - requires two for loops and two union operations: O(len(s)+len(t)) according to Python Wiki TIme Complexity for the union operations. Uses x in s operation to find whether calling numbers are in the combined set: O(n) is worst case. Uses sorted function twice: once to sort all numbers to check and once to sort the calling list. These should have O(n log n) each as worst case.
 
 
 
