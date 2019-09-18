@@ -1,4 +1,15 @@
 """
+Double Linked List: has the following methods:
+    appending - add to beginning of list
+    prepending - add item at end of list
+    finding (search) a node for a value
+    pop - remove item from beginning of list
+    remove - find item that matches value and remove first occurrence
+    insert - a new node into specified position in the list
+    convert to regular Python list
+    print nodes in natural order
+    print nodes in reverse natual order
+
 linked list fundamentals: https://www.pythoncentral.io/singly-linked-list-insert-node/
 
 Add new node to beginning of list. This keeps coding simple and allows it to act like
@@ -128,7 +139,7 @@ class DoublyLinkedList(object):
 
         while current_node:
             if current_node.getData() == value:
-                # if found link previous node's next to current's next
+                # if found link the previous node's next to current's next
                 # effectively skips or jumps around the node to remove
                 if previous_node:
                     previous_node.setNextNode(current_node.getNextNode())
