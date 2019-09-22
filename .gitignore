@@ -1,7 +1,7 @@
 # .gitignore
 *.pdf
-tmp/.ipynb_checkpoints
+practice/.ipynb_checkpoints
 project1/*.zip
 project1/*.ods
 project1/.~*
-
+*.ods
