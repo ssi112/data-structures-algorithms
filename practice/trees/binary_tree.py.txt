@@ -1,0 +1,98 @@
+node0:
+  value: None
+  left: None
+  right: None
+
+has left child? False
+has right child? False
+adding left and right children
+
+node 0: apple
+  node 0 left child: banana
+  node 0 right child: orange
+
+has left child? True
+has right child? True
+
+===========================
+visit_order ['apple']
+stack:
+<top of stack>
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+Node(apple) has left child? True
+visit Node(banana)
+
+===========================
+visit_order ['apple', 'banana']
+stack:
+<top of stack>
+_________________
+Node(banana)
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+Node(banana) has left child? True
+visit Node(dates)
+
+visit_order ['apple', 'banana', 'dates']
+stack:
+<top of stack>
+_________________
+Node(dates)
+_________________
+Node(banana)
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+Node(dates) has left child? False
+Node(dates) has right child? False
+Node(dates)
+Node(banana)
+Node(banana) has right child? False
+pop Node(banana) off stack
+
+stack
+<top of stack>
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+Node(apple)
+Node(apple) has right child? True
+visit Node(cherry)
+
+visit_order ['apple', 'banana', 'dates', 'cherry']
+stack
+<top of stack>
+_________________
+Node(cherry)
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+Node(cherry) has left child? False
+Node(cherry) has right child? False
+pop Node(cherry) off the stack
+
+visit_order ['apple', 'banana', 'dates', 'cherry']
+stack
+<top of stack>
+_________________
+Node(apple)
+_________________
+<bottom of stack>
+
+pop Node(apple) off stack
+pre-order traversal visited nodes in this order: ['apple', 'banana', 'dates', 'cherry']
+stack
+<stack is empty>

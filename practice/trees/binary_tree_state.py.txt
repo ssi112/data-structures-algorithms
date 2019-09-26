@@ -1,0 +1,113 @@
+
+            loop count: 0
+            current node: Node(apple)
+            stack:
+            <top of stack>
+_________________
+Node(apple)
+visited_left: False
+visited_right: False
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 1
+            current node: Node(banana)
+            stack:
+            <top of stack>
+_________________
+Node(banana)
+visited_left: False
+visited_right: False
+        
+_________________
+Node(apple)
+visited_left: True
+visited_right: False
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 2
+            current node: Node(dates)
+            stack:
+            <top of stack>
+_________________
+Node(dates)
+visited_left: False
+visited_right: False
+        
+_________________
+Node(banana)
+visited_left: True
+visited_right: False
+        
+_________________
+Node(apple)
+visited_left: True
+visited_right: False
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 3
+            current node: Node(banana)
+            stack:
+            <top of stack>
+_________________
+Node(banana)
+visited_left: True
+visited_right: False
+        
+_________________
+Node(apple)
+visited_left: True
+visited_right: False
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 4
+            current node: Node(apple)
+            stack:
+            <top of stack>
+_________________
+Node(apple)
+visited_left: True
+visited_right: False
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 5
+            current node: Node(cherry)
+            stack:
+            <top of stack>
+_________________
+Node(apple)
+visited_left: True
+visited_right: True
+        
+_________________
+<bottom of stack>
+            
+
+            loop count: 6
+            current node: None
+            stack:
+            <stack is empty>
+            
+
+*** pre_order_recursion ***
+['apple', 'banana', 'dates', 'cherry']
+
+*** in_order_recursion ***
+['dates', 'banana', 'apple', 'cherry']
+
+*** post_order_recursion ***
+['dates', 'banana', 'cherry', 'apple']
