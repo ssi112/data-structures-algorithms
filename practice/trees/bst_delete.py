@@ -214,12 +214,12 @@ class Tree(object):
 
         # If the value to be deleted is smaller than the root's
         # value then it lies in left subtree
-        if value < root.value:
+        if value < root.get_value():
             root.left = self.delete_node(root.left, value)
 
         # If the value to be deleted is greater than the root's value
         # then it lies in right subtree
-        elif(value > root.value):
+        elif(value > root.get_value()):
             root.right = self.delete_node(root.right, value)
 
         # If value is same as root's value, then this is the node to be deleted
@@ -239,10 +239,11 @@ class Tree(object):
             temp = self.min_value_node(root.right)
 
             # Copy the inorder successor's content to this node
-            root.value = temp.value
+            # root.value = temp.get_value()
+            root.set_value(temp.get_value())
 
             # Delete the inorder successor
-            root.right = self.delete_node(root.right, temp.value)
+            root.right = self.delete_node(root.right, temp.get_value())
 
         return root
 
