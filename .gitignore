@@ -1,5 +1,6 @@
 # .gitignore
 *.pdf
+practice/.ip*
 practice/.ipynb_checkpoints
 practice/trees/.ipynb_checkpoints
 practice/maps_hashing/.ipynb_checkpoints
