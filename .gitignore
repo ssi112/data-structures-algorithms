@@ -2,6 +2,7 @@
 *.pdf
 practice/.ipynb_checkpoints
 practice/trees/.ipynb_checkpoints
+practice/maps_hashing/.ipynb_checkpoints
 project1/*.zip
 project1/*.ods
 project1/.~*
