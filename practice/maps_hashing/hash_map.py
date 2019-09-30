@@ -77,6 +77,8 @@ will be less than 10, allowing it to fit into our bucket array.
 
 !!! Using compression increases likelhood of COLLISIONS !!!
 
+https://www.geeksforgeeks.org/hashing-set-2-separate-chaining/
+
 """
 class HashMap:
     def __init__(self, initial_size=10):
