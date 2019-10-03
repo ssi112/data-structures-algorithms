@@ -14,7 +14,7 @@ Course Outline
 * Efficiency
    * Understanding the importance of efficiency when working with data structures and algorithms. 
 * Project 1 - Unscramble CS Problems
-   * complete five tasks based on a fabricated set of calls and texts exchanged during September 2016
+   * Complete five tasks based on a fabricated set of calls and texts exchanged during September 2016
    * Use Python to analyze and answer questions about the texts and calls contained in the dataset
    * Perform run time analysis of your solution and determine its efficiency
   
@@ -26,7 +26,7 @@ Course Outline
 * Apply Recursion to Problems
 * Trees - basic trees, traversal & binary search trees
 * Maps and Hashing
-* Project - Show Me the Data Structures: implement appropriate data structures and corresponding methods
+* Project  2 - Show Me the Data Structures: implement appropriate data structures and corresponding methods
    1. LRU Cache
    2. File Recursion 
    3. Huffman Coding
