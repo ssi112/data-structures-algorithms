@@ -7,4 +7,7 @@ practice/maps_hashing/.ipynb_checkpoints
 project1/*.zip
 project1/*.ods
 project1/.~*
+project2/*.zip
+project2/lru_cache_2.py
+
 *.ods
