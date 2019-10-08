@@ -12,101 +12,26 @@ Here is one type of pseudocode for this coding schema:
     5) Encode the text into its compressed form
     6) Decode the text from its compressed form
 
-https://stackoverflow.com/questions/11587044/how-can-i-create-a-tree-for-huffman-encoding-and-decoding
-
 """
 
 import sys
-# from priority_queue import *
 import queue
 
 class Huffman_Node(object):
-    def __init__(self, left = None, right = None, node = None):
+    def __init__(self, left = None, right = None, frequency = None, element = None):
         self.left = left
         self.right = right
-        self.node = node
+        self.frequency = frequency
+        self.element = element
+
+    def __eq__(self, other):
+        return self.frequency == other.frequency
 
     def __lt__(self, other):
-        return 0
+        return self.frequency < other.frequency
 
-    def set_element_frequency(self, element, frequency):
-        self.element = element
-        self.frequency = frequency
-
-    def get_element_frequency(self):
-        return ((self.inx, self.element, self.frequency))
-
-    def get_left_child(self):
-        return self.left
-
-    def get_right_child(self):
-        return self.right
-
-    def set_left_child(self, node):
-        self.left = node
-
-    def set_right_child(self, node):
-        self.right = node
-
-    def has_left_child(self):
-        return self.left != None
-
-    def has_right_child(self):
-        return self.right != None
-
-
-# ################################# ################################# ###### #
-# MIGHT WANT TO REVISE SOME OF THIS
-# https://stackoverflow.com/questions/2598437/how-to-implement-a-binary-tree
-# See 9 Simple implementation of BST in Python
-#
-#       eliminate calling add then calling _add
-#       can do it once with recursion
-#       same with print
-# ################################# ################################# ###### #
-class Huffman_Tree(object):
-    def __init__(self):
-        self.root = None
-
-    def get_root(self):
-        return self.root
-
-    def add(self, inx, element, frequency):
-        if self.root == None:
-            self.root = Huffman_Node(None, None, inx, element, frequency)
-            #print("add root", None, None, inx, element, frequency)
-        else:
-            self._add(inx, element, frequency, self.root)
-
-    def _add(self, inx, element, frequency, node):
-        if(inx < node.inx):
-            if(node.left != None):
-                self._add(inx, element, frequency, node.left)
-                #print("add node.left", None, None, inx, element, frequency)
-            else:
-                node.left = Huffman_Node(None, None, inx, element, frequency)
-        else:
-            if(node.right != None):
-                self._add(inx, element, frequency, node.right)
-                #print("add node.right", None, None, inx, element, frequency)
-            else:
-                node.right = Huffman_Node(None, None, inx, element, frequency)
-
-    def print_tree(self):
-        if(self.root != None):
-            self._print_tree(self.root)
-
-    def _print_tree(self, node):
-        if(node != None):
-            self._print_tree(node.left)
-            print(node.get_element_frequency())
-            self._print_tree(node.right)
-
-    def printInorder(self, node):
-        if(node != None):
-            self.printInorder(node.left)
-            print(node.get_element_frequency())
-            self.printInorder(node.right)
+    def __gt__(self, other):
+        return self.frequency > other.frequency
 
 
 def frequency_count(sentence):
@@ -139,25 +64,31 @@ def create_huffman_tree(frequencies):
 
     # create a leaf node for each letter
     for value in frequencies:
+        # this does not work
+        # node = Huffman_Node(None, None, value[0], value[1])
+
+        # this doesn't work either
         # add it to the queue
-        priority_queue.put(value)
+        # priority_queue.put(value)
+        node = Huffman_Node()
+        #priority_queue.put(value, value[0], value[1])
+        priority_queue.put(node, value[0], value[1])
 
     while priority_queue.qsize() > 1:
+
         # get the two highest priority items
         hp1 = priority_queue.get() # left
         hp2 = priority_queue.get() # right
-        node = Huffman_Node(hp1, hp2)
-
+        print("-----------------FUBAR--------------------------")
         print("hp1[0] - hp1[1]", hp1[0], hp1[1])
         print("hp2[0] - hp2[1]", hp2[0], hp2[1])
         print(hp1[0] + hp2[0])
-        priority_queue.put( (hp1[0] + hp2[0], node) )
-        # print(hp1, hp2)
+        print(hp1, hp2)
+        print("-----------------FUBAR--------------------------")
 
+        node = Huffman_Node(hp1, hp2, hp1[0] + hp2[0])
 
-        # tree.add(0, hp1.element+hp2.element, hp1.priority+hp2.priority)
-        # tree.add(0, hp2.element, hp2.priority)
-        # add new priority, new element  to the queue
+        priority_queue.put(node)
     return priority_queue.get()
 
 
@@ -171,13 +102,11 @@ frequencies = frequency_count(sentence)
 
 print(frequencies)
 
+"""
 print("\nindex frequency letter")
 print("------------------------")
 for inx, (frequency, letter) in enumerate(frequencies):
     print("  {0:02d}    {1:6.3f}      '{2}'".format(inx, frequency, letter))
-
-
-"""
 """
 
 node = create_huffman_tree(frequencies)
@@ -191,9 +120,3 @@ tree.printInorder(tree.get_root())
 print("#"*55)
 # tree.print_tree()
 
-
-"""
-code = walk_tree(tree)
-for i in sorted(frequencies, reverse=True):
-    print(i[1], '{:6.2f}'.format(i[0]), code[i[1]])
-"""
