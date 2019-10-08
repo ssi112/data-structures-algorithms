@@ -11,20 +11,23 @@ Here is one type of pseudocode for this coding schema:
     4) Trim the Huffman Tree (remove the frequencies from the previously built tree)
     5) Encode the text into its compressed form
     6) Decode the text from its compressed form
+
+https://stackoverflow.com/questions/11587044/how-can-i-create-a-tree-for-huffman-encoding-and-decoding
+
 """
 
 import sys
-
-sentence = "The bird is the word"
-
+# from priority_queue import *
+import queue
 
 class Huffman_Node(object):
-    def __init__(self, left = None, right = None, inx = None, element = None, frequency = 0.0):
+    def __init__(self, left = None, right = None, node = None):
         self.left = left
         self.right = right
-        self.inx = inx
-        self.element = element
-        self.frequency = frequency
+        self.node = node
+
+    def __lt__(self, other):
+        return 0
 
     def set_element_frequency(self, element, frequency):
         self.element = element
@@ -50,6 +53,7 @@ class Huffman_Node(object):
 
     def has_right_child(self):
         return self.right != None
+
 
 # ################################# ################################# ###### #
 # MIGHT WANT TO REVISE SOME OF THIS
@@ -125,20 +129,39 @@ def frequency_count(sentence):
     for key in char_count:
         char_count[key] = round(char_count[key] / sum_a_thon * 100, 3)
     # convert to a list of tuples
-    list_of_tuples = [(key, value) for key, value in char_count.items()]
+    list_of_tuples = [(value, key) for key, value in char_count.items()]
     # sort the list by the letter x[1] then return it
     return list_of_tuples
-    #return sorted(list_of_tuples, key = lambda x: x[1])
 
 
-def create_huffman_tree(tree, frequencies):
+def create_huffman_tree(frequencies):
+    priority_queue = queue.PriorityQueue()
+
     # create a leaf node for each letter
-    # tree = Huffman_Tree()
-    for inx, (letter, frequency) in enumerate(frequencies):
-        tree.add(inx, letter, frequency)
-        #print("inx, letter, frequency", inx, letter, frequency)
-    # return tree
+    for value in frequencies:
+        # add it to the queue
+        priority_queue.put(value)
 
+    while priority_queue.qsize() > 1:
+        # get the two highest priority items
+        hp1 = priority_queue.get() # left
+        hp2 = priority_queue.get() # right
+        node = Huffman_Node(hp1, hp2)
+
+        print("hp1[0] - hp1[1]", hp1[0], hp1[1])
+        print("hp2[0] - hp2[1]", hp2[0], hp2[1])
+        print(hp1[0] + hp2[0])
+        priority_queue.put( (hp1[0] + hp2[0], node) )
+        # print(hp1, hp2)
+
+
+        # tree.add(0, hp1.element+hp2.element, hp1.priority+hp2.priority)
+        # tree.add(0, hp2.element, hp2.priority)
+        # add new priority, new element  to the queue
+    return priority_queue.get()
+
+
+sentence = "The bird is the word"
 
 print("~"*sys.getsizeof(sentence))
 print ("The size of the data is: {}\n".format(sys.getsizeof(sentence)))
@@ -148,20 +171,25 @@ frequencies = frequency_count(sentence)
 
 print(frequencies)
 
-print("\nindex letter frequency")
+print("\nindex frequency letter")
 print("------------------------")
-for inx, (letter, frequency) in enumerate(frequencies):
-    print("  {0:02d}    '{1}'      {2:6.3f}".format(inx, letter, frequency))
+for inx, (frequency, letter) in enumerate(frequencies):
+    print("  {0:02d}    {1:6.3f}      '{2}'".format(inx, frequency, letter))
 
 
 """
 """
-tree = Huffman_Tree()
-create_huffman_tree(tree, frequencies)
+
+node = create_huffman_tree(frequencies)
+
+print("\n...node...")
+print(node)
+print("\n")
+
 print("#"*55)
 tree.printInorder(tree.get_root())
 print("#"*55)
-tree.print_tree()
+# tree.print_tree()
 
 
 """
