@@ -8,7 +8,7 @@ project1/*.zip
 project1/*.ods
 project1/.~*
 project2/*.zip
-project2/lru_cache_2.py
+project2/3_huffman.py
 project2/__pycache__
 
 *.ods

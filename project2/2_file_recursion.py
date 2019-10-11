@@ -80,7 +80,7 @@ os.chdir(path)
 
 print("~"*55)
 for file_names in suffix_files:
-    print(file_names)
+    # print(file_names)
     # testdir is test directory
     # so relative path looks something like '/testdir/sub_dir/file_name'
     pos = file_names.find('testdir')
