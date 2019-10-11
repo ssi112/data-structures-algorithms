@@ -1,5 +1,5 @@
 """
-3_huffman.py
+3x_huffman.py
 
 Here is one type of pseudocode for this coding schema:
 
@@ -139,18 +139,19 @@ def create_huffman_tree(frequencies):
     del priority_queue
     return tree
 
-###### #### ### ## # # # # # # # # # # # # # # # # # # ## ### #### #####
-def encode_string(root, encoding_string = "", codes = {}):
+
+def encode_string(root, encoding_string = "", codes = ""):
     """
-    store the codes in a dict
+    store the codes in a string
     left branch is 0, right branch is 1
     """
     if root:
         if root.element is not None:
             print(">>>", root.element, encoding_string, root.frequency)
-            codes[root.element] = encoding_string
-        encode_string(root.left, encoding_string + "0")
-        encode_string(root.right, encoding_string + "1")
+            codes += encoding_string
+            # print(codes)
+        codes = encode_string(root.left, encoding_string + "0", codes)
+        codes = encode_string(root.right, encoding_string + "1", codes)
     return codes
 
 def decode_string(root, encode_string):
@@ -160,46 +161,27 @@ def decode_string(root, encode_string):
     Iterate through each char in data
     If the current_node is a leaf, concatenate char with message
     If current_node is not a leaf, traverse left or right depending on data
-        (0 means left; 1 means right)
+        if letter is 0 move left
+        if letter is 1 move right
     Return message
-
-    if letter is 0 move left
-    if letter is 1 move right
-    if leaf node append letter to output string
-    A couple of references (not that they help)
-    https://www.techiedelight.com/huffman-coding/
-    https://riptutorial.com/algorithm/example/23995/huffman-coding
-    """
-    """
-    maybe this would work if a string is sent in instead of a dict
-    ??????????????????????????????????????????????????????????????
-    while (node.left is not None and node.right is not None):
-        for letter, coded_value in encode_string.items():
-            for char in coded_value:
-                if char == "0":
-                    node = node.left
-                else:
-                    node = node.right
-    output += node.element
     """
     output = ""
     node = root
-    for letter, coded_value in encode_string.items():
-        for char in coded_value:
-            # print("char =", char)
-            #print("==> node ==>", node)
-            #print("==> output ==>", output)
-            if char == '0':
-                node = node.left    # left branch
-            else:
-                node = node.right    # right branch
+    for char in encode_string:
+        #print("char =", char)
+        #print("==> node ==>", node)
+        #print("==> output ==>", output)
         # found a character (leaf) - add to output
         # then restart for next character
         if (node.left is None and node.right is None):
             output += node.element
             node = root;
+        if char == '0':
+            node = node.left    # left branch
+        else:
+            node = node.right    # right branch
+    output += node.element      # capture final node element
     return output
-###### #### ### ## # # # # # # # # # # # # # # # # # # ## ### #### #####
 
 
 sentence = "The bird is the word"
@@ -224,18 +206,11 @@ tree = create_huffman_tree(frequencies)
 print("\n...tree...")
 tree.display()
 
-codes = {}
-codes = encode_string(tree)
+codes = ""
+# codes = {}
+codes = encode_string(tree, "", "")
 print("\n-----encoded_sentence-----")
 print(codes)
-
-"""
-
-for letter, coded_value in codes.items():
-    print("letter = {} encoded value = {}".format(letter, coded_value))
-    for char in coded_value:
-        print("char =", char)
-"""
 
 print("\n-----decoded_sentence-----")
 print(decode_string(tree, codes))
