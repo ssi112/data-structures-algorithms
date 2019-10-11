@@ -144,7 +144,7 @@ def encode_string(root, encoding_string = "", codes = ""):
     """
     store the codes in a string
     left branch is 0, right branch is 1
-    """
+
     if root:
         if root.element is not None:
             print(">>>", root.element, encoding_string, root.frequency)
@@ -152,6 +152,13 @@ def encode_string(root, encoding_string = "", codes = ""):
             # print(codes)
         codes = encode_string(root.left, encoding_string + "0", codes)
         codes = encode_string(root.right, encoding_string + "1", codes)
+    """
+    if not root.left and not root.right:
+        codes += encoding_string
+        #print("---codes--->", codes)
+        return codes
+    codes = encode_string(root.left, encoding_string + "0", codes)
+    codes = encode_string(root.right, encoding_string + "1", codes)
     return codes
 
 def decode_string(root, encode_string):
