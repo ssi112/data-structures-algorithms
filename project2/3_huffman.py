@@ -117,12 +117,6 @@ def frequency_count(sentence):
             char_count[char] += 1
         else:
             char_count[char] = 1
-    # sum of all values
-    sum_a_thon = sum(char_count.values())
-    # convert counts to a relative frequency
-    list_of_tuples = []
-    for key in char_count:
-        char_count[key] = round(char_count[key] / sum_a_thon * 100, 3)
     # convert to a list of tuples
     list_of_tuples = [(value, key) for key, value in char_count.items()]
     return list_of_tuples
@@ -148,7 +142,7 @@ def create_huffman_tree(frequencies):
     return tree
 
 
-def encode_string(root, encoding_string = None, codes = None):
+def encode_string(node, encoding_string = None, codes = None):
     """
     store the codes in a string
     left branch is 0, right branch is 1
@@ -157,19 +151,19 @@ def encode_string(root, encoding_string = None, codes = None):
         codes = {}
     if encoding_string is None:
         encoding_string = ""
-
-    if root.element:
-        codes[root.element] = encoding_string
+    if node.element:
+        codes[node.element] = encoding_string
         return
-    encode_string(root.left, encoding_string + "0", codes)
-    encode_string(root.right, encoding_string + "1", codes)
+    encode_string(node.left, encoding_string + "0", codes)
+    encode_string(node.right, encoding_string + "1", codes)
     return codes
 
 
 def encode(codes, sentence):
-    output = ""
-    for char in sentence:
-        output += codes[char]
+    """
+    join the codes together into one string
+    """
+    output = "".join([codes[letter] for letter in sentence])
     return output
 
 
@@ -184,79 +178,22 @@ def decode_string(root, encoded_string):
         if letter is 1 move right
     Return message
     """
-    output = ""
     node = root
+    output = ""
     for char in encoded_string:
-        #print("char =", char)
-        #print("==> node ==>", node)
-        #print("==> output ==>", output)
-
-        # found a character (leaf) - add to output
-        # then restart for next character
         if (node.left is None and node.right is None):
+            # found a character (leaf) - add to output
+            # then restart for next character
             output += node.element
             node = root;
         if char == '0':
-            node = node.left    # left branch
+            node = node.left
         else:
-            node = node.right    # right branch
-    output += node.element      # capture final node element
-
+            node = node.right
+    # capture final node element
+    output += node.element
     return output
 
-
-from collections import deque
-def dfs_postorder_traverse(root, queue = deque()):
-    visited = []
-    if root:
-        visited.append(root)
-        print(root.element)
-    current = root
-    while current:
-        if current.left:
-            print(current.left.element)
-            visited.append(current.left)
-        if current.right:
-            print(current.right.element)
-            visited.append(current.right)
-        visited.pop(0)
-        if not visited:
-            break
-        current = visited[0]
-    """
-    if head is None:
-        return
-    if head.element is not None:
-        print(head.element)
-    [queue.append(node) for node in [head.left, head.right] if node]
-    if queue:
-        dfs_postorder_traverse(queue.popleft(), queue)
-    """
-
-def is_leaf_node(node):
-    if node and not node.left and not node.right:
-        return True
-    else:
-        return False
-
-def print_leaf_to_root_paths(root, arr):
-    if not root:
-        return
-
-    arr.append(root.element)
-
-    if is_leaf_node(root):
-        print(arr)
-    if root.left:
-        print_leaf_to_root_paths(root.left, arr)
-    if root.right:
-        print_leaf_to_root_paths(root.right, arr)
-    arr.pop()
-
-def in_order_traverse(root):
-    if root is not None:
-        in_order_traverse(root.right)
-        print("in order", root.element, in_order_traverse(root.left))
 
 # ----------------------------------------------------------------------- #
 sentence = "The bird is the word"
@@ -271,12 +208,6 @@ frequencies = frequency_count(sentence)
 print("\n-----frequencies-----")
 print(frequencies)
 
-"""
-print("\nindex frequency letter")
-print("------------------------")
-for inx, (frequency, letter) in enumerate(frequencies):
-    print("  {0:02d}    {1:6.3f}      '{2}'".format(inx, frequency, letter))
-"""
 
 # ----------------------------------------------------------------------- #
 # 2) create the huffman tree
@@ -285,12 +216,6 @@ tree = create_huffman_tree(frequencies)
 print("\n...tree...")
 tree.display()
 
-################################
-# traversing the tree exercise #
-################################
-#dfs_postorder_traverse(tree)
-#print_leaf_to_root_paths(tree, [])
-#in_order_traverse(tree)
 
 # ----------------------------------------------------------------------- #
 # 3) create a character to binary code mapping
