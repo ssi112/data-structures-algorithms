@@ -70,7 +70,7 @@ def find_user(user, group):
         if isinstance(groupie, Group):
             groupie_name = groupie.get_name()
             if is_user_in_group(user, groupie):
-                in_groups.append(groupie.get_name())
+                in_groups.append(groupie_name)
     return in_groups
 
 
