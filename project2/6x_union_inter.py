@@ -82,12 +82,56 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
+# ------------------------------------
+print("\nTest 1 with Python's set methods...\n")
+set1 = set()
+set2 = set()
+
+set1.update(element_1)
+set2.update(element_2)
+
+set_union = set1.union(set2)
+set_intersect = set1.intersection(set2)
+
+
+def union_test(e1, e2):
+    # test the union logic
+    e3 = []
+    for e in e1:
+        if e not in e3:
+            e3.append(e)
+        if e in e2:
+            if e not in e3:
+                e3.append(e)
+    for e in e2:
+        if e not in e3:
+            e3.append(e)
+        if e in e1:
+            if e not in e3:
+                e3.append(e)
+    return sorted(e3)
+
+
+def intersection_test(e1, e2):
+    # test the intersection logic
+    e3 = []
+    for e in e1:
+        if e in e2 and e not in e3:
+            e3.append(e)
+    return sorted(e3)
+
+
+print("       Test 1: Python's set union check:", sorted(set_union))
+print("Test 1: Python's set intersection check:", sorted(set_intersect))
+print("                      union_test result:", union_test(element_1, element_2))
+print("               intersection_test result:", intersection_test(element_1, element_2))
+
+#print(union(linked_list_1, linked_list_2))
+#print(intersection(linked_list_1, linked_list_2))
 
 
 #-----------------------------------------------------------------------
-# Test case 2
+print("\nTest 2 with Python's set methods...\n")
 linked_list_3 = LinkedList()
 linked_list_4 = LinkedList()
 
@@ -100,7 +144,23 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))
+# ------------------------------------
+# test with Python's set methods
+set1.clear()
+set2.clear()
+
+set1.update(element_1)
+set2.update(element_2)
+
+set_union = set1.union(set2)
+set_intersect = set1.intersection(set2)
+
+print("       Test 2: Python's set union check:", sorted(set_union))
+print("Test 2: Python's set intersection check:", sorted(set_intersect))
+print("                      union_test result:", union_test(element_1, element_2))
+print("               intersection_test result:", intersection_test(element_1, element_2))
+
+#print(union(linked_list_3, linked_list_4))
+#print(intersection(linked_list_3, linked_list_4))
 
 
