@@ -71,14 +71,34 @@ def find_files(suffix, path):
             paths.extend(find_files(suffix, pathalogic))
     return paths
 
+def check_paths(list_of_paths):
+    str1 = "./testdir/subdir1/a.c"
+    str2 = "./testdir/subdir3/subsubdir1/b.c"
+    str3 = "./testdir/subdir5/a.c"
+    str4 = "./testdir/t1.c"
+    count = 0
+    if str1 in list_of_paths:
+        count += 1
+    if str2 in list_of_paths:
+        count += 1
+    if str3 in list_of_paths:
+        count += 1
+    if str4 in list_of_paths:
+        count += 1
+    if count == 4:
+        return True
+    return False
+
 suffix = ".c"
 path = os.getcwd()
 suffix_files = find_files(suffix, path)
+relative_paths = []
 
 # go back to where we started
 os.chdir(path)
 
-print("~"*55)
+print("-"*55)
+print("Showing relative paths...\n")
 for file_names in suffix_files:
     # print(file_names)
     # testdir is test directory
@@ -89,9 +109,12 @@ for file_names in suffix_files:
     else:
         slash = '\\'
     print(".{}{}".format(slash, file_names[pos:]))
-    """
+    relative_paths.append("." + slash + file_names[pos:])
 
-    print( [pos for pos, char in enumerate(file_names) if char == slash] )
-    """
+
+print("\nChecking list of paths...")
+print("Pass, yay!" if (check_paths(relative_paths)) else "Fail, uh oh!")
+
+
 
 

@@ -1,0 +1,24 @@
+#1 LRU Cache
+
+Uses Pythons's OrderedDict as cache, which keeps track of the order that
+entries are inserted. Deleting an entry and reinserting it will move it to the end.
+If the value of a key is changed, the key position does not change. Ordered Dictionaries are implement as hash tables. Reference https://mail.python.org/pipermail/python-dev/2017-December/151283.html. Hash tables should provide average O(1) for search, insertion and deletion and O(n) at the worst in time complexxity and O(n) space complexity.
+
+
+#2 File Recursion
+Uses a list containing the paths as the problem called for it. Lists work well for this problem as they provide quick access and ease of iteration to display output and also to build the list. Appending to a list is O(1) while extending a list is O(k) - 'k' in this case should be the number of elements.
+
+Recursion was used, again as the problem called for it, however recursion does use additional overhead as it requires additional stack space for the functions arguments, rewinding the stack, passing control back to where the function was called, etc. Also, requires some additional time to complete these steps. This particular problem does not have a deep directory structure so I imagine any overhead is minimal. Recursion fits this problem well.
+
+
+#3 Huffman Encoding
+Let's see, this is a course on Data Structures *and* Algorithms. So far we've covered Python review, problem solving and data structures. Suddenly, here is a problem about data compression and that has not been addressed in the course at all up to this point.
+
+My project is late. Why? Because I spent a week on this problem. Oh, the three links provided are useless. One doesn't work. The other two show visuals on how a tree is built. That's so nice. What would have been helpful if any explained the actual process in pseudo-code and not just building the tree, but in the actual method of compressing and decompressing the code.
+
+Anyway, I used a tree. Why? Because the problem stated, "Build the Huffman Tree". So the tree holds the letters and counts. Trees typically have O(log(n)) time for accessing, insertion and deletion on average. Worse case is O(n).
+
+There are other structues in here as well: a dictionary to keep track of the letters and counts - O(1) average, O(n) worse case as when the dict is iterated over to create a list of tuples. There is also a priority queue: O(n) worse case for access and searching, O(1) inserting. A priority queue works well for this problem because it keeps track of the minimum value. Items with highest priority are dequeued before those with lower priorities. Items with same priority are served according to their order in the queue. So this takes care of a lot of the managing the nodes of the tree.
+
+
+

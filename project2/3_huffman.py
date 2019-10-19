@@ -48,6 +48,7 @@ class Huffman_Node(object):
             print(line)
 
 ### # ### # ### # ### # ### # ### # ### # ### # ### # ### # ### # ### # ### # ### # ###
+#                       NOT needed - can be ignored
     def _display_aux(self):
         """
         Returns list of strings, width, height, and horizontal coordinate of the root.

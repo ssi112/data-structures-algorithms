@@ -22,7 +22,6 @@ For the current problem, you can consider the size of cache = 5
 Uses Pythons's OrderedDict as cache, which keeps track of the order that
 entries are inserted. Deleting an entry and reinserting it will move it to the end.
 If the value of a key is changed, the key position does not change.
-Uses a double linked list to implement.
 
 Reference: https://docs.python.org/2/library/collections.html#collections.OrderedDict
 
@@ -75,17 +74,19 @@ our_cache.set(2, 2);
 our_cache.set(3, 3);
 our_cache.set(4, 4);
 
+print()
+print("Returns 1 - our_cache.get(1):", our_cache.get(1))
+print("Returns 2 - our_cache.get(2):", our_cache.get(2))
+print("Returns -1 - our_cache.get(9):", our_cache.get(9))
+print("  (because 9 is not present in the cache)")
 
-print("\nour_cache.get(1):", our_cache.get(1))   # returns 1
-print("our_cache.get(2):", our_cache.get(2))   # returns 2
-print("our_cache.get(9):", our_cache.get(9))   # returns -1 because 9 is not present in the cache
-
-print("\nsetting key, value pairs: (5, five), (6, six)")
+print("\nSetting key, value pairs: (5, five), (6, six)")
 our_cache.set(5, "five")
 our_cache.set(6, "six")
 
 # returns -1 because the cache reached it's capacity and 3 was the least
 # recently used entry
 print("\nour_cache.get(3):", our_cache.get(3))
-print("\nour_cache.get(5):", our_cache.get(5))
-print("our_cache.get(6):", our_cache.get(6))
+print("Returned -1 because the cache reached it's capacity and 3 was the least recently used entry")
+print("\nReturns 'five' - our_cache.get(5):", our_cache.get(5))
+print("Returns 'six' - our_cache.get(6):", our_cache.get(6))

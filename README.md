@@ -27,13 +27,16 @@ Course Outline
 * Trees - basic trees, traversal & binary search trees
 * Maps and Hashing
 * Project  2 - Show Me the Data Structures: implement appropriate data structures and corresponding methods
-   1. LRU Cache
+   1. Least Recently Used (LRU) Cache
    2. File Recursion 
    3. Huffman Coding
    4. Active Directory
    5. Blockchain
    6. Union and Intersection
    7. Show Me the Data Structures
+         * Include three test cases for each solution
+         * In separate text file, write explanation for using given data structure and explain the time and speed efficiency for each solution.
+         
 
 **Basic Algorithms**
 
