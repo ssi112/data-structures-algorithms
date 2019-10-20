@@ -12,13 +12,9 @@ Recursion was used, again as the problem called for it, however recursion does u
 
 
 #3 Huffman Encoding
-Let's see, this is a course on Data Structures *and* Algorithms. So far we've covered Python review, problem solving and data structures. Suddenly, here is a problem about data compression and that has not been addressed in the course at all up to this point.
-
-My project is late. Why? Because I spent a week on this problem. Oh, the three links provided are useless. One doesn't work. The other two show visuals on how a tree is built. That's so nice. What would have been helpful if any explained the actual process in pseudo-code and not just building the tree, but in the actual method of compressing and decompressing the code.
-
 I used a tree. Why? Because the problem stated, "Build the Huffman Tree". So the tree holds the letters and counts. Trees typically have O(log(n)) time for accessing, insertion and deletion on average. Worse case is O(n).
 
-There are other structues in here as well: a dictionary to keep track of the letters and counts - O(1) average, O(n) worse case as when the dict is iterated over to create a list of tuples. There is also a priority queue: O(n) worse case for access and searching, O(1) inserting. A priority queue works well for this problem because it keeps track of the minimum value. Items with highest priority are dequeued before those with lower priorities. Items with same priority are served according to their order in the queue. So this takes care of a lot of the managing the nodes of the tree.
+There are other structues in here as well: a dictionary to keep track of the letters and counts - O(1) average, O(n) worse case as when the dict is iterated over to create a list of tuples. There is also a priority queue: O(n) worse case for access and searching, O(1) inserting. A priority queue works well for this problem because it keeps track of the minimum value. Items with highest priority are dequeued before those with lower priorities. Items with same priority are served according to their order in the queue. This takes care of some of the work managing the nodes of the tree.
 
 
 #4 Active Directory
