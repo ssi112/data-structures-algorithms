@@ -16,9 +16,18 @@ Let's see, this is a course on Data Structures *and* Algorithms. So far we've co
 
 My project is late. Why? Because I spent a week on this problem. Oh, the three links provided are useless. One doesn't work. The other two show visuals on how a tree is built. That's so nice. What would have been helpful if any explained the actual process in pseudo-code and not just building the tree, but in the actual method of compressing and decompressing the code.
 
-Anyway, I used a tree. Why? Because the problem stated, "Build the Huffman Tree". So the tree holds the letters and counts. Trees typically have O(log(n)) time for accessing, insertion and deletion on average. Worse case is O(n).
+I used a tree. Why? Because the problem stated, "Build the Huffman Tree". So the tree holds the letters and counts. Trees typically have O(log(n)) time for accessing, insertion and deletion on average. Worse case is O(n).
 
 There are other structues in here as well: a dictionary to keep track of the letters and counts - O(1) average, O(n) worse case as when the dict is iterated over to create a list of tuples. There is also a priority queue: O(n) worse case for access and searching, O(1) inserting. A priority queue works well for this problem because it keeps track of the minimum value. Items with highest priority are dequeued before those with lower priorities. Items with same priority are served according to their order in the queue. So this takes care of a lot of the managing the nodes of the tree.
 
 
+#4 Active Directory
+Decided to use a set for groups and users as they have a bit less overhead than lists and are faster. Though, because the small size for testing purposes the actual time difference was so minor not to be noticed. They also don't allow for duplicates, which seems like something needed if storing actual user IDs. Searching through a set using x in s, which this does, averages O(1) while worse case is O(n). At least in this example we are not concerned about the order the entries are stored in and a set accommodates that well.
+
+
+#5 Blockchain
+The problem calls for a linked list. Hmm, I'm noticing a pattern here. This is a singly linked list that maintains a tail pointer. New blocks are appended and the tail always points to the most recently added block. There is a previous pointer within the blocks  themselves so traversal backwards through the block chain is possible. Insertions have average and worse case Big O(1) while searching requires O(n). As a side note the data stored is simply a random integer.
+
+#6 Union & Intersection
+Here again the problem calls for using linked lists to mimic the actions of a set's methods for union and intersection. Insertions and deletions (deletes not done in this example) have average and worse case Big O(1). A method of finding whether a value is in the list is implemented (in_list) and this can require O(n) in order to find an item. To implement the union and intersect method requires multiple searches. For instance, the union goes through each list element by element and searches for it in the union list to avoid duplicates. Doesn't seem terribly efficient to use lists for this problem. Python, I believe, uses a hash to implement sets.
 

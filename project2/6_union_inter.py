@@ -74,14 +74,12 @@ class LinkedList:
 # ------------------------------------
 def union(llist_1, llist_2):
     ll_union = LinkedList()
+    # search through the first list
     current = llist_1.head
     while current:
         e = current.get_value()
         if not ll_union.in_list(e):
             ll_union.append(e)
-        if llist_2.in_list(e):
-            if not ll_union.in_list(e):
-                ll_union.append(e)
         current = current.next
     # search in the llist_2
     current = llist_2.head
@@ -89,13 +87,11 @@ def union(llist_1, llist_2):
         e = current.get_value()
         if not ll_union.in_list(e):
             ll_union.append(e)
-        if llist_1.in_list(e):
-            if not ll_union.in_list(e):
-                ll_union.append(e)
         current = current.next
     if ll_union.size():
         return ll_union
     return None
+
 
 # ------------------------------------
 def intersection(llist_1, llist_2):
@@ -109,6 +105,30 @@ def intersection(llist_1, llist_2):
     if ll_intersect.size():
         return ll_intersect
     return None
+
+
+# ======================================================================
+def test_ui(element_1, element_2, llu, lli):
+    # test against Python's set methods
+    set1 = set(element_1)
+    set2 = set(element_2)
+
+    set_union = set1.union(set2)
+    set_intersect = set1.intersection(set2)
+
+    # compare the link list union (llu) against set_union
+    if llu and set_union:
+        current = llu.head
+        for element in set_union:
+            if not llu.in_list(element):
+                return False
+    # compare the link list intersect (lli) against set_intersect
+    if lli and set_intersect:
+        current = lli.head
+        for element in set_intersect:
+            if not lli.in_list(element):
+                return False
+    return True
 
 
 #-----------------------------------------------------------------------
@@ -125,10 +145,14 @@ for i in element_1:
 for i in element_2:
     linked_list_2.append(i)
 
+ll_union = union(linked_list_1, linked_list_2)
+ll_intersect = intersection(linked_list_1, linked_list_2)
+print("\nTest Case 1")
+print("    union", ll_union)
+print("intersect", ll_intersect)
 
-print(union(linked_list_1, linked_list_2))
-print(intersection(linked_list_1, linked_list_2))
-
+print("\nChecking against Python's union and intersection with sets...", end=" ")
+print("Pass, yay!" if (test_ui(element_1, element_2, ll_union, ll_intersect)) else "Fail, uh oh!")
 
 #-----------------------------------------------------------------------
 # Test case 2
@@ -144,7 +168,35 @@ for i in element_1:
 for i in element_2:
     linked_list_4.append(i)
 
-print(union(linked_list_3, linked_list_4))
-print(intersection(linked_list_3, linked_list_4))
+ll_union = union(linked_list_3, linked_list_4)
+ll_intersect = intersection(linked_list_3, linked_list_4)
+print("\nTest Case 2")
+print("    union", ll_union)
+print("intersect", ll_intersect)
 
+print("\nChecking against Python's union and intersection with sets...", end=" ")
+print("Pass, yay!" if (test_ui(element_1, element_2, ll_union, ll_intersect)) else "Fail, uh oh!")
+
+#-----------------------------------------------------------------------
+# Test case 3
+linked_list_5 = LinkedList()
+linked_list_6 = LinkedList()
+
+element_1 = [2, 4, 6, 8, 10]
+element_2 = [1,3,5,7,9,11,13]
+
+for i in element_1:
+    linked_list_5.append(i)
+
+for i in element_2:
+    linked_list_6.append(i)
+
+ll_union = union(linked_list_5, linked_list_6)
+ll_intersect = intersection(linked_list_5, linked_list_6)
+print("\nTest Case 3")
+print("    union", ll_union)
+print("intersect", ll_intersect)
+
+print("\nChecking against Python's union and intersection with sets...", end=" ")
+print("Pass, yay!" if (test_ui(element_1, element_2, ll_union, ll_intersect)) else "Fail, uh oh!")
 
