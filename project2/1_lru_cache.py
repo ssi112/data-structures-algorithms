@@ -33,12 +33,18 @@ from collections import OrderedDict
 
 class lru_cache(object):
     def __init__(self, capacity = 5):
-        self.capacity = capacity
+        # default to 5 if zero or not an integer
+        self.capacity = capacity if capacity is not 0 and isinstance(capacity, int) else 5
         self.cache = OrderedDict()
+
+    @property
+    def get_capacity(self):
+        return self.capacity
 
     def get(self, key):
         if key in self.cache.keys():
             """
+            In Python 3 cache.keys() is O(1). In 2 it is O(n).
             pop removes item and then re-inserting it moves it to the back
             which makes it the most recently used/accessed
             """
@@ -67,6 +73,7 @@ class lru_cache(object):
 
 print("\ncreate new cache to hold maximum five entries...\n")
 our_cache = lru_cache(5)
+print("Capacity of cache is ", our_cache.capacity)
 
 print("setting key, value pairs: (1,1), (2,2), (3,3) & (4,4)")
 our_cache.set(1, 1);

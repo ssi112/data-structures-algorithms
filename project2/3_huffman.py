@@ -102,17 +102,19 @@ def frequency_count(sentence):
     counts the occurrence of each letter in sentence
     calculates a relative frequency for each letter
     convert it to a sorted list of tuples [(frequency, letter)]
+    returns False if var passed is not a string
     """
     char_count = {}
+    if not isinstance(sentence, str):
+        return False
+
     # create the counts for each letter
     for char in sentence:
         """
-        Original - linear time access
         if char in char_count:
             char_count[char] += 1
         else:
             char_count[char] = 1
-        Recommended - constant time access
         """
         if char_count.get(char):
             char_count[char] += 1
@@ -124,6 +126,10 @@ def frequency_count(sentence):
 
 
 def create_huffman_tree(frequencies):
+    # check and return False if not valid input
+    if not frequencies:
+        return False
+
     priority_queue = queue.PriorityQueue()
 
     # create a leaf node for each letter
@@ -147,7 +153,11 @@ def encode_string(node, encoding_string = None, codes = None):
     """
     store the codes in a string
     left branch is 0, right branch is 1
+    return False is tree (node) does not exist
     """
+    if not node:
+        return False
+
     if codes is None:
         codes = {}
     if encoding_string is None:
@@ -164,6 +174,8 @@ def encode(codes, sentence):
     """
     join the codes together into one string
     """
+    if not codes:
+        return False
     output = "".join([codes[letter] for letter in sentence])
     return output
 
@@ -179,6 +191,9 @@ def decode_string(root, encoded_string):
         if letter is 1 move right
     Return message
     """
+    if not root or not encoded_string:
+        return False
+
     node = root
     output = ""
     for char in encoded_string:
@@ -207,15 +222,15 @@ print ("The content of the data is: '{}'\n".format(sentence))
 # 1) set the frequency counts
 frequencies = frequency_count(sentence)
 print("\n-----frequencies-----")
-print(frequencies)
+print("frequencies =>", frequencies)
 
 
 # ----------------------------------------------------------------------- #
 # 2) create the huffman tree
 tree = create_huffman_tree(frequencies)
 
-print("\n...tree...")
-tree.display()
+# print("\n...tree...")
+# tree.display()
 
 
 # ----------------------------------------------------------------------- #

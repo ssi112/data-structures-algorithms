@@ -27,9 +27,11 @@ class Block(object):
         sha.update(hash_str)
         return sha.hexdigest()
 
+    @property
     def get_previous_hash(self):
         return self.previous_hash
 
+    @property
     def get_hash(self):
         return self.hash
 
@@ -51,13 +53,15 @@ class Chain(object):
         return self.size
 
     def append(self, data):
+        if data is None or data == "":
+            return False
+
         if self.tail is None:
             self.tail = big_bang_block() # initialize
             self.size += 1
             return True
 
         new_block = create_new_block(data, self.tail)
-        # new_block.previous_block = self.tail
         self.tail = new_block
         self.size += 1
         return True
@@ -89,6 +93,9 @@ def main():
     chain_link.append(random.randint(1, 9999))
     chain_link.append(random.randint(1, 9999))
     chain_link.append(random.randint(1, 9999))
+    trap = chain_link.append("")
+    if not trap:
+        print("Uh oh, that didn't work. Try again, please!")
 
     print("\n-----Block Chain (link list test)-----")
     i = chain_link.get_size()

@@ -2,7 +2,7 @@
 
 Uses Pythons's OrderedDict as cache, which keeps track of the order that
 entries are inserted. Deleting an entry and reinserting it will move it to the end.
-If the value of a key is changed, the key position does not change. Ordered Dictionaries are implement as hash tables. Reference https://mail.python.org/pipermail/python-dev/2017-December/151283.html. Hash tables should provide average O(1) for search, insertion and deletion and O(n) at the worst in time complexxity and O(n) space complexity.
+If the value of a key is changed, the key position does not change. Ordered Dictionaries are implement as hash tables. Reference https://mail.python.org/pipermail/python-dev/2017-December/151283.html. Hash tables should provide average O(1) for search, insertion and deletion and O(n) at the worst in time complexity and O(n) space complexity.
 
 
 #2 File Recursion

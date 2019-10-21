@@ -200,3 +200,25 @@ print("intersect", ll_intersect)
 print("\nChecking against Python's union and intersection with sets...", end=" ")
 print("Pass, yay!" if (test_ui(element_1, element_2, ll_union, ll_intersect)) else "Fail, uh oh!")
 
+#-----------------------------------------------------------------------
+# Test case 4
+linked_list_7 = LinkedList()
+linked_list_8 = LinkedList()
+
+element_1 = []
+element_2 = []
+
+for i in element_1:
+    linked_list_7.append(i)
+
+for i in element_2:
+    linked_list_8.append(i)
+
+ll_union = union(linked_list_7, linked_list_8)
+ll_intersect = intersection(linked_list_7, linked_list_8)
+print("\nTest Case 4")
+print("    union", ll_union)
+print("intersect", ll_intersect)
+
+print("\nChecking against Python's union and intersection with sets...", end=" ")
+print("Pass, yay!" if (test_ui(element_1, element_2, ll_union, ll_intersect)) else "Fail, uh oh!")

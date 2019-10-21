@@ -57,6 +57,8 @@ def find_files(suffix, path):
        a list of paths
     """
     paths = []
+    if not suffix or not path:
+        return False
     for dirs in os.listdir(path):
         pathalogic = os.path.join(path, dirs)
         if os.path.isfile(pathalogic):
@@ -70,6 +72,7 @@ def find_files(suffix, path):
             # if not done the final 'return paths' yields an empty list
             paths.extend(find_files(suffix, pathalogic))
     return paths
+
 
 def check_paths(list_of_paths):
     str1 = "./testdir/subdir1/a.c"
@@ -95,21 +98,23 @@ suffix_files = find_files(suffix, path)
 relative_paths = []
 
 # go back to where we started
-os.chdir(path)
+if path:
+    os.chdir(path)
 
-print("-"*55)
-print("Showing relative paths...\n")
-for file_names in suffix_files:
-    # print(file_names)
-    # testdir is test directory
-    # so relative path looks something like '/testdir/sub_dir/file_name'
-    pos = file_names.find('testdir')
-    if '/' in file_names:
-        slash = '/'
-    else:
-        slash = '\\'
-    print(".{}{}".format(slash, file_names[pos:]))
-    relative_paths.append("." + slash + file_names[pos:])
+if suffix_files is not False:
+    print("-"*55)
+    print("Showing relative paths...\n")
+    for file_names in suffix_files:
+        # print(file_names)
+        # testdir is test directory
+        # so relative path looks something like '/testdir/sub_dir/file_name'
+        pos = file_names.find('testdir')
+        if '/' in file_names:
+            slash = '/'
+        else:
+            slash = '\\'
+        print(".{}{}".format(slash, file_names[pos:]))
+        relative_paths.append("." + slash + file_names[pos:])
 
 
 print("\nChecking list of paths...")
