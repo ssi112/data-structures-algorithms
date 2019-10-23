@@ -127,10 +127,22 @@ def frequency_count(sentence):
 
 def create_huffman_tree(frequencies):
     # check and return False if not valid input
-    if not frequencies:
+    try:
+        if not frequencies:
+            msg  = "\nError: There is nothing to encode!"
+            msg += "\nCheck your input and try again.\n"
+            raise ValueError(msg)
+    except ValueError as ve:
+        print(ve)
         return False
 
     priority_queue = queue.PriorityQueue()
+
+    if len(frequencies) == 1:
+        # make a fake root node
+        # left = None, right = None, frequency = None, element = None
+        node = Huffman_Node(None, None, 0, None)
+        priority_queue.put(node)
 
     # create a leaf node for each letter
     for value in frequencies:
@@ -169,9 +181,6 @@ def encode_string(node, encoding_string = None, codes = None):
         # return
     encode_string(node.left, encoding_string + "0", codes)
     encode_string(node.right, encoding_string + "1", codes)
-
-    print("encode_string: encoding_string =>", encoding_string)
-    print("encode_string: node.element =>", node.element)
     return codes
 
 
@@ -179,11 +188,15 @@ def encode(codes, sentence):
     """
     join the codes together into one string
     """
-    if not codes:
+    try:
+        if not codes:
+            msg  = "\nNo data available for encoding.\nDid you send a valid string?"
+            raise ValueError(msg)
+    except ValueError as ve:
+        print(ve)
         return False
+
     output = "".join([codes[letter] for letter in sentence])
-    print("encode: codes:", codes)
-    print("encode: output:", output)
     return output
 
 
@@ -198,7 +211,13 @@ def decode_string(root, encoded_string):
         if letter is 1 move right
     Return message
     """
-    if not root or not encoded_string:
+    try:
+        if not root or not encoded_string:
+            msg  = "\nERROR! Nothing to decode!"
+            msg += "\nPlease check your data and try again!"
+            raise ValueError(msg)
+    except ValueError as ve:
+        print(ve)
         return False
 
     node = root
@@ -219,7 +238,7 @@ def decode_string(root, encoded_string):
 
 
 def test_case(some_string):
-    print("----- TEST -----")
+    print("\n>>>>> TEST <<<<<")
     print("~"*sys.getsizeof(some_string))
     print ("The size of the data is: {}".format(sys.getsizeof(some_string)))
     print ("The content of the data is: '{}'".format(some_string))
@@ -234,9 +253,12 @@ def test_case(some_string):
     # 2) create the huffman tree
     tree = create_huffman_tree(frequencies)
 
+    """
+    # print if desired - can take up a lot of screen real estate
     if tree:
         print("\n...tree...")
         tree.display()
+    """
 
     # ----------------------------------------------------------------------- #
     # 3) create a character to binary code mapping
@@ -256,11 +278,14 @@ def test_case(some_string):
 
 def main():
     sentence = "The bird is the word"
-    #test_case(sentence)
+    test_case(sentence)
 
     # will just return Falses on an empty string
     sentence = ""
-    #test_case(sentence)
+    test_case(sentence)
+
+    sentence = "A"
+    test_case(sentence)
 
     sentence = "AAA"
     test_case(sentence)
