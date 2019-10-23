@@ -153,7 +153,7 @@ def encode_string(node, encoding_string = None, codes = None):
     """
     store the codes in a string
     left branch is 0, right branch is 1
-    return False is tree (node) does not exist
+    return False if tree (node) does not exist
     """
     if not node:
         return False
@@ -164,9 +164,14 @@ def encode_string(node, encoding_string = None, codes = None):
         encoding_string = ""
     if node.element:
         codes[node.element] = encoding_string
-        return
+        #print("encode_string: encoding_string =>", encoding_string)
+        #print("encode_string: node.element =>", node.element)
+        # return
     encode_string(node.left, encoding_string + "0", codes)
     encode_string(node.right, encoding_string + "1", codes)
+
+    print("encode_string: encoding_string =>", encoding_string)
+    print("encode_string: node.element =>", node.element)
     return codes
 
 
@@ -177,6 +182,8 @@ def encode(codes, sentence):
     if not codes:
         return False
     output = "".join([codes[letter] for letter in sentence])
+    print("encode: codes:", codes)
+    print("encode: output:", output)
     return output
 
 
@@ -211,42 +218,53 @@ def decode_string(root, encoded_string):
     return output
 
 
-# ----------------------------------------------------------------------- #
-sentence = "The bird is the word"
+def test_case(some_string):
+    print("----- TEST -----")
+    print("~"*sys.getsizeof(some_string))
+    print ("The size of the data is: {}".format(sys.getsizeof(some_string)))
+    print ("The content of the data is: '{}'".format(some_string))
 
-print("~"*sys.getsizeof(sentence))
-print ("The size of the data is: {}\n".format(sys.getsizeof(sentence)))
-print ("The content of the data is: '{}'\n".format(sentence))
+    # ----------------------------------------------------------------------- #
+    # 1) set the frequency counts
+    frequencies = frequency_count(some_string)
+    print("\n-----frequencies-----")
+    print("frequencies =>", frequencies)
 
-# ----------------------------------------------------------------------- #
-# 1) set the frequency counts
-frequencies = frequency_count(sentence)
-print("\n-----frequencies-----")
-print("frequencies =>", frequencies)
+    # ----------------------------------------------------------------------- #
+    # 2) create the huffman tree
+    tree = create_huffman_tree(frequencies)
 
+    if tree:
+        print("\n...tree...")
+        tree.display()
 
-# ----------------------------------------------------------------------- #
-# 2) create the huffman tree
-tree = create_huffman_tree(frequencies)
+    # ----------------------------------------------------------------------- #
+    # 3) create a character to binary code mapping
+    codes = {}
+    codes = encode_string(tree, "", codes)
+    print("\n-----codes-----")
+    print(codes)
 
-# print("\n...tree...")
-# tree.display()
-
-
-# ----------------------------------------------------------------------- #
-# 3) create a character to binary code mapping
-codes = {}
-codes = encode_string(tree, "", codes)
-print("\n-----codes-----")
-print(codes)
-
-# ----------------------------------------------------------------------- #
-# 4) create the encoded message
-encoded_string = encode(codes, sentence)
-print("\n-----encoded message-----")
-print(encoded_string)
-
-print("\n-----decoded_sentence-----")
-print(decode_string(tree, encoded_string))
+    # ----------------------------------------------------------------------- #
+    # 4) create the encoded message
+    encoded_string = encode(codes, some_string)
+    print("\n-----encoded message-----")
+    print(encoded_string)
+    print("\n-----decoded_sentence-----")
+    print(decode_string(tree, encoded_string))
 
 
+def main():
+    sentence = "The bird is the word"
+    #test_case(sentence)
+
+    # will just return Falses on an empty string
+    sentence = ""
+    #test_case(sentence)
+
+    sentence = "AAA"
+    test_case(sentence)
+
+
+if __name__ == "__main__":
+    main()
