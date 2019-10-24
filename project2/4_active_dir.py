@@ -44,6 +44,21 @@ def is_user_in_group(user, group):
       group(class:Group): group to check user membership against
     """
     # print("user {} - group {}".format(user, group.name))
+
+    try:
+        if group == "" or group is None:
+            msg  = "\nInvalid group (empty or none). Please provide another group to check."
+            raise ValueError(msg)
+        if not isinstance(group, Group):
+            msg = "\nGroup: " + str(group) + " does not exist. Please try again."
+            raise ValueError(msg)
+        if user == "" or user is None:
+            msg = "\nInvalid user provided. Please provide another user name to check."
+            raise ValueError(msg)
+    except ValueError as err_msg:
+        print(err_msg)
+        return False
+
     in_group_flag = False
     # search in the inital group given
     if user in group.get_users():
@@ -67,6 +82,10 @@ sub_child.add_user(sub_child_user)
 child.add_group(sub_child)
 parent.add_group(child)
 
-# should return true
-print(is_user_in_group(sub_child_user, parent))
+print("Should be True:", is_user_in_group(sub_child_user, parent))
 
+print("Should be False:", is_user_in_group(sub_child_user, None))
+
+print("Should be False:", is_user_in_group("", parent))
+
+print("Should be False:", is_user_in_group("Imogen Heep", "MobyDick"))

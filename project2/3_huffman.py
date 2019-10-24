@@ -277,7 +277,7 @@ def test_case(some_string):
 
 
 def main():
-    sentence = "The bird is the word"
+    sentence = "The bird is the word."
     test_case(sentence)
 
     # will just return Falses on an empty string
