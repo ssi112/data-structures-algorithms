@@ -40,5 +40,18 @@ Course Outline
 
 **Basic Algorithms**
 
+* Basic Algorithms
+* Sorting Algorithms
+* Faster Divide & Conquer
+* Project 3 - Problems vs. Algorithms
+   1. Square Root of an Integer
+   2. Search in a Rotated, Sorted Array
+   3. Rearrange Array Digits
+   4. Dutch National Flag Problem
+   5. Autocomplete with Tries
+   6. Unsorted Integer Array
+   7. Request Routing in a Web Server with a Trie
+   
+
 **Advanced Algorithms**
 
