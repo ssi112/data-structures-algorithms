@@ -74,19 +74,26 @@ def rotated_array_search(input_list, number):
 
 
 def find_partition_index(input_list, first, last):
-    # if this is a sorted list no need to partition it
-    if input_list[first] < input_list[last]:
-        return -1
-    # we can get stuck in this loop w/out above test
-    while 1:
-        middle = (first + last) // 2
-        if input_list[middle] > input_list[middle + 1]:
+    """
+    Divide up the list by iteratively narrowing the
+    partition to find the pivot point basically by
+    checking if the portion is sorted
+     - essentially a binary search) - O(log n)
+    ------------------------------------------------------
+    We can get stuck in this loop w/out below test in case
+    where this is a sorted list the indx will calc the
+    middle position and never change
+    """
+    indx = -1
+    while indx != ((first + last) // 2):
+        indx = (first + last) // 2
+        if input_list[indx] > input_list[indx + 1]:
             break
-        if input_list[middle] > input_list[first]:
-            first = middle
-        if input_list[last] > input_list[middle]:
-            last = middle
-    return middle
+        if input_list[indx] > input_list[first]:
+            first = indx
+        if input_list[last] > input_list[indx]:
+            last = indx
+    return indx
 
 
 def binary_search(input_list, number, first, last):
@@ -127,7 +134,8 @@ test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 test_function([[1, 2, 3, 4, 6, 7, 8, 9], 6])
 
-test_function([[6, 7, 8, 11, 12, 13, 14], 10])
+test_function([[6, 7, 8, 9, 10, 11, 12, 13, 14], 10])
 
 test_function([[12, 13, 14, 15, 16, 17, 18, 10, 11], 10])
 test_function([[12, 13, 14, 15, 16, 17, 18, 10, 11], 13])
+test_function([[16, 11, 12, 13, 14, 15], 11])
