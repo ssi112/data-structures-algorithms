@@ -38,30 +38,59 @@ def rotated_array_search(input_list, number):
 
     # before we embark on a search see if we already have target data
     if number == input_list[first_indx]:
+        # found it in first position
         return first_indx
+
     if number == input_list[mid_indx]:
+        # found it in middle position
         return mid_indx
+
     if number == input_list[last_indx]:
+        # found it in last position
         return last_indx
 
-    # partition the input list and do a binary search
-    if number < input_list[first_indx] and number < input_list[mid_indx]:
-        # search right partition
-        print("searching right...")
-        print("right partition:", input_list[mid_indx + 1 : last_indx])
-        return binary_search(input_list, number, mid_indx + 1, last_indx)
+    # partition the input list and do a binary search but first
+    # find the index to partition the list
+    indx = find_partition_index(input_list, first_indx, last_indx)
+    # print("partition index is", indx)
+    # print("input_list", input_list)
 
-    if number > input_list[first_indx] and number > input_list[mid_indx]:
-        # search left partition
-        print("searching left...")
-        print("left partition:", input_list[first_indx : mid_indx - 1])
-        return binary_search(input_list, number, first_indx, mid_indx - 1)
+    if indx == -1:
+        # could be a sorted list, let's try a binary search
+        return binary_search(input_list, number, first_indx, last_indx)
+
+    # search left partition
+    if number >= input_list[first_indx] and number <= input_list[indx]:
+        return binary_search(input_list, number, first_indx, indx)
+
+    # search right partition
+    if number >= input_list[indx + 1] and number <= input_list[last_indx]:
+        return binary_search(input_list, number, indx + 1, last_indx)
 
     # if those don't work do a plain binary search on entire list
+    # print("plain binary search " + str(input_list) + "..." + str(number))
+    # at this point the number is likely not in the list, but check anyway
     return binary_search(input_list, number, first_indx, last_indx)
 
 
+def find_partition_index(input_list, first, last):
+    # if this is a sorted list no need to partition it
+    if input_list[first] < input_list[last]:
+        return -1
+    # we can get stuck in this loop w/out above test
+    while 1:
+        middle = (first + last) // 2
+        if input_list[middle] > input_list[middle + 1]:
+            break
+        if input_list[middle] > input_list[first]:
+            first = middle
+        if input_list[last] > input_list[middle]:
+            last = middle
+    return middle
+
+
 def binary_search(input_list, number, first, last):
+    # cannot find it
     if first > last:
         return -1
     middle = (first + last) // 2
@@ -90,14 +119,15 @@ def test_function(test_case):
     else:
         print("Fail")
 
-"""
+
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
 test_function([[1, 2, 3, 4, 6, 7, 8, 9], 6])
+
 test_function([[6, 7, 8, 11, 12, 13, 14], 10])
-"""
+
 test_function([[12, 13, 14, 15, 16, 17, 18, 10, 11], 10])
 test_function([[12, 13, 14, 15, 16, 17, 18, 10, 11], 13])
