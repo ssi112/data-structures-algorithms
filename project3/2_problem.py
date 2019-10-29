@@ -52,8 +52,8 @@ def rotated_array_search(input_list, number):
     # partition the input list and do a binary search but first
     # find the index to partition the list
     indx = find_partition_index(input_list, first_indx, last_indx)
-    # print("partition index is", indx)
-    # print("input_list", input_list)
+    #print("partition index is", indx)
+    #print("input_list", input_list)
 
     if indx == -1:
         # could be a sorted list, let's try a binary search

@@ -29,12 +29,43 @@ Since recursion was avoided space complexity is added by the additional variable
 ### Big O Time Complexity
 This appears to be a candidate for recursion, but was done with iteration and avoids the overhead of recursion. The Babylonian method also has less operations to perform then the binary method in the core process. It should perform O(log n) where n is the input number to the function.
 
+---
 ## Problem #2: Search in a Rotated Sorted Array
 
+### Design
+Before it embarks on a binary search the first thing that happens is to check the first, middle and last index position for the target value. If it exist in one of those positions then it returns the respective index. If not it proceeds to partition the input list by iteratively narrowing the partition to find the pivot point. Once the pivot point is found it then performs a binary search.
+
+### Big O Space Complexity
+Both finding the pivot point and the binary search require a pointer to the list as well as the first and last pointers. It takes O(n) space to store the list plus the additional variables.
+
+### Big O Time Complexity
+Finding the pivot point is similar to a binary search as both begin by halving the list through each iteration and continuing  dividing it in half until we find the pivot point or the target value. Both should operate in O(log n), where n is the input size of the array/list.
+
+
+---
 ## Problem #3: Rearrange Array Elements
 
+### Design
+Commutative law of addition says it doesn't matter what order you add up numbers as they will always sum to the same answer. So rearranging array elements will always yield the sum of the digits regardless of order. As such it is possible to arrange the digits in multiple ways and always get the sum of the digits.
+
+Divides the list in half and uses a recursive merge sort to create two lists of digits. 
+
+### Big O Space Complexity
+Merge sort space complexity is O(n) as it must create a copy of the entire list.
+
+### Big O Time Complexity
+Merge sort has a worst case time complexity of O(n log(n)).
+
+---
 ## Problem #4: Dutch National Flag Problem
 
+### Big O Space Complexity
+
+
+### Big O Time Complexity
+
+
+### Design
 
 
 
