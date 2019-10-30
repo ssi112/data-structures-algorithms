@@ -47,7 +47,9 @@ random.shuffle(l)
 
 print("Pass" if ((0, 9) == find_min_max(l)) else "Fail")
 
-print("min max", find_min_max([]))
-print("min max", find_min_max([99]))
-print("min max", find_min_max([0,0,-1,-1,0,-2,1,0,2,1]))
-print("min max", find_min_max([99,99]))
+print("Pass" if ((False, False) == find_min_max([])) else "Fail")
+print("Pass" if ((99, 99) == find_min_max([99])) else "Fail")
+print("Pass" if ((-2, 2) == find_min_max([0,0,-1,-1,0,-2,1,0,2,1])) else "Fail")
+print("Pass" if ((99, 99) == find_min_max([99,99])) else "Fail")
+
+
