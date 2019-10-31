@@ -1,6 +1,6 @@
 # Project #3
 
-## <span style="text-decoration: underline">Requirements</span>
+## Requirements
 
 ### Data Structure Questions
 
@@ -39,7 +39,7 @@ Before it embarks on a binary search the first thing that happens is to check th
 Both finding the pivot point and the binary search require a pointer to the list as well as the first and last pointers. It takes O(n) space to store the list plus the additional variables.
 
 ### Big O Time Complexity
-Finding the pivot point is similar to a binary search as both begin by halving the list through each iteration and continuing  dividing it in half until we find the pivot point or the target value. Both should operate in O(log n), where n is the input size of the array/list.
+Finding the pivot point is similar to a binary search as both begin by halving the list through each iteration and continuing  dividing it in half until we find the pivot point or the target value. Both should operate in O(log n), where n is the input size of the array/list. If the target value is found in the first, middle or last position within the list then it operates at O(1) best case. 
 
 
 ---
@@ -59,14 +59,47 @@ Merge sort has a worst case time complexity of O(n log(n)).
 ---
 ## Problem #4: Dutch National Flag Problem
 
+### Design
+The algorithm steps through the input list using a three-way partitioning of the array. Comparing items in the list to the middle value, the ones, it swaps the elements moving the zeroes to the beginning and the twos towards the end. 
+
+### Big O Space Complexity
+Uses three additional integers for keeping track of the low, mid and high points in the list plus one to hold the middle value for a total of four and, of course, a copy of the input list/array: O(n). Through the magic of Python, C really, we are able to swap elements without the need for a temp variable to hold one of the items to swap. 
+
+### Big O Time Complexity
+Iterates through the list one time to complete the swaps: O(n) where n is the number of elements in the list.
+
+---
+## Problem #5: Autocomplete With Tries
+
+### Design
+
 ### Big O Space Complexity
 
 
 ### Big O Time Complexity
 
 
+---
+## Problem #6: Max and Min in a Unsorted Array
+
+### Design
+First things first, if the list size is zero just return False. If the list size is one then set min and max to the lone value. Use the first two items in the list and comparing them, set them to min or max. These form the base values for comparing items in the rest of the list. Now walk through the remainder of the list and compare items to update min or max as needed.
+
+### Big O Space Complexity
+Two variables to hold min and max plus a copy of the list of n elements: O(n)
+
+### Big O Time Complexity
+Makes one pass through the list examining each element one time: O(n) with n being number of elements in list.
+
+---
+## Problem #7: HTTPRouter using a Trie
+
 ### Design
 
+### Big O Space Complexity
+
+
+### Big O Time Complexity
 
 
 
