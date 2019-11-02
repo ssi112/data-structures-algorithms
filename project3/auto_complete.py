@@ -1,5 +1,17 @@
 """
 auto_complete.py
+
+From Adriaan B.
+The cleanest way I've seen is using a generator with a yield and a yield
+from statement. Here's my pseudo-code for recursion:
+
+    create a list to store words
+    for every item in children (letter => node)
+    base case => if node is a leaf append word to list of words
+    else => list of words += recursive call to collect letters in
+    suffix as suffix += letter
+    return list of words
+
 """
 from collections import defaultdict
 class TrieNode:
@@ -34,13 +46,27 @@ class TrieNode:
 
     def find_letters(self, node, letters, result):
         if node.is_word:
-            result.append(letters[:])
+            result.append(node.word) #(letters[:]) #(node.word)
             #print("result.append(self.letters)", result)
         for key, next_node in node.children.items():
             letters.append(key)
             self.find_letters(next_node, letters, result)
             # pop last item in list
             letters.pop(-1)
+
+    def find_word(self, word):
+        ## Find the Trie node that represents this prefix
+        if self is None:
+            return None
+        node = self
+        for char in word:
+            if char not in node.children:
+                return (False, False)
+            node = node.children[char]
+        return (node.is_word, node.word)
+
+    def fubar(self, string, starting_node):
+        return False
 
 
 ## The Trie itself containing the root node and insert/find functions
@@ -72,10 +98,20 @@ class Trie:
             node = node.children[char]
         return (node.is_word, node.word)
 
+    def find_words(self, suffix):
+        if self.root is None:
+            return None
+        if suffix == '':
+            return None
+        node = self.root
+        return node.suffixes(suffix)
+
 
 wordList = ["ant", "anthology", "antagonist", "antonym",
             "fun", "function", "factory", "tensorflow",
-            "trie", "trigger", "trigonometry", "tripod"
+            "trie", "trigger", "trigonometry", "tripod",
+            "perfunctory", "zagnut", "zanzibar", "dredd",
+            "persnickety"
            ]
 
 root = TrieNode()
@@ -89,6 +125,21 @@ prefix_node = root.suffixes('f')
 if prefix_node:
     for prefixes in prefix_node:
         print(''.join(prefixes))
+else:
+    print("not found")
+
+
+print("~"*70)
+
+test_trie = Trie()
+for word in wordList:
+    test_trie.insert(word)
+
+auto_words = test_trie.find_words('p')
+print(auto_words)
+
+if auto_words:
+    print('\n'.join(auto_words))
 else:
     print("not found")
 
