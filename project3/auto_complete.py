@@ -33,17 +33,30 @@ class TrieNode:
         ## all complete words below this point
         result = []
         node = self
-        #print("suffix=", suffix)
         for s in suffix:
             if s in node.children:
                 node = node.children[s]
-                #for key, val in node.children.items():
-                #    result.append(key)
             else:
                 return result
-        self.find_letters(node, list(suffix), result)
+        self.find_letters(node, suffix, result)
         return result
 
+    def find_letters(self, node, letters, result):
+        """
+        create a list to store words
+        for every item in children (letter => node)
+        base case => if node is a leaf append word to list of words
+        else => list of words += recursive call to collect letters in
+        suffix as suffix += letter
+        return list of words
+        """
+        for key, next_node in node.children.items():
+            if next_node.is_word:
+                result.append(letters+key)
+            self.find_letters(next_node, letters+key, result)
+
+    """
+    ORIGINAL METHOD
     def find_letters(self, node, letters, result):
         if node.is_word:
             result.append(node.word) #(letters[:]) #(node.word)
@@ -53,6 +66,7 @@ class TrieNode:
             self.find_letters(next_node, letters, result)
             # pop last item in list
             letters.pop(-1)
+    """
 
     def find_word(self, word):
         ## Find the Trie node that represents this prefix
@@ -135,7 +149,7 @@ test_trie = Trie()
 for word in wordList:
     test_trie.insert(word)
 
-auto_words = test_trie.find_words('p')
+auto_words = test_trie.find_words('t')
 print(auto_words)
 
 if auto_words:
