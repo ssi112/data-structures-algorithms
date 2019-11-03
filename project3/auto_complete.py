@@ -1,19 +1,19 @@
 """
 auto_complete.py
 
-From Adriaan B.
-The cleanest way I've seen is using a generator with a yield and a yield
-from statement. Here's my pseudo-code for recursion:
+With a functioning Trie, add the ability to list suffixes to implement our
+autocomplete feature. To do that, we need to implement a new function on the
+TrieNode object that will return all complete word suffixes that exist below
+it in the trie.
 
-    create a list to store words
-    for every item in children (letter => node)
-    base case => if node is a leaf append word to list of words
-    else => list of words += recursive call to collect letters in
-    suffix as suffix += letter
-    return list of words
+For example, if our Trie contains the words ["fun", "function", "factory"]
+and we ask for suffixes from the f node, we would expect to receive
+["un", "unction", "actory"] back from node.suffixes().
 
 """
+
 from collections import defaultdict
+
 class TrieNode:
     def __init__(self, word = None):
         ## Initialize this node in the Trie
@@ -79,9 +79,6 @@ class TrieNode:
             node = node.children[char]
         return (node.is_word, node.word)
 
-    def fubar(self, string, starting_node):
-        return False
-
 
 ## The Trie itself containing the root node and insert/find functions
 class Trie:
@@ -128,6 +125,8 @@ wordList = ["ant", "anthology", "antagonist", "antonym",
             "persnickety"
            ]
 
+# ----------------------------------------------------------------------
+# test by calling it directly on the node class
 root = TrieNode()
 for word in wordList:
     root.insert(word)
@@ -143,6 +142,8 @@ else:
     print("not found")
 
 
+# ----------------------------------------------------------------------
+# test by calling the trie class
 print("~"*70)
 
 test_trie = Trie()
