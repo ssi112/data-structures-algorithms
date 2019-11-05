@@ -40,38 +40,65 @@ class RouteTrie:
         Initialize the trie with a root node and a handler,
         this is the root path or home page node
         """
+        self.root = RouteTrieNode()
 
 
-    def insert(self):
+    def insert(self, path, handler):
         """
         Similar to our previous example you will want to recursively
         add nodes. Make sure you assign the handler to only the leaf
         (deepest) node of this path
         """
+        node = self.root
+        for path_part in path:
+            if path_part not in node.children:
+                node.children[path_part] = RouteTrieNode()
+            node = node.children[path_part]
 
-
-    def find(self):
+    def find(self, path):
         """
         Starting at the root, navigate the Trie to find a match for
         this path. Return the handler for a match, or None for no match
         """
+        if self.root is None:
+            return None
+        node = self.root
+        for path_part in path:
+            if path_part not in node.children:
+                return None
+            node = node.children[path_part]
+        return node.handler
+
 
 
 # The Router class will wrap the Trie and handle
 class Router:
-    def __init__(self):
+    def __init__(self, handler):
         """
         Create a new RouteTrie for holding our routes. You could also
         add a handler for 404 page not found responses as well!
         """
+        self.root = RouteTrieNode()
+        self.handler = handler
+        self.not_found = "HTTP 404 Page Not Found"
 
-    def add_handler(self):
+    def add_handler(self, path, handler):
         """
         Add a handler for a path. You will need to split the path and
-        pass the pass parts as a list to the RouteTrie
+        pass the parts as a list to the RouteTrie
         """
+        node = self.root
+        path_list = self.split_path(path)
+        for path_part in path_list:
+            if path_part not in node.children:
+                # add the path if it doesn't exist
+                node.insert(path_part)
+            node = node.children[path_part]
+        # at the end so can add the handler
+        node.handler = handler
 
-    def lookup(self):
+
+    def lookup(self, path):
         """
         Lookup path (by parts) and return the associated handler.
         You can return None if it's not found or return the "not found"
@@ -79,13 +106,32 @@ class Router:
         Bonus points if a path works with and without a trailing slash
         e.g. /about and /about/ both return the /about handler
         """
+        if path == "/":
+            return "got root!"
 
+        node = self.root
+        path_list = self.split_path(path)
 
-    def split_path(self):
+        for path_part in path_list:
+            if path_part not in node.children:
+                return node.not_found
+            node = node.children[path_part]
+        return node.handler
+
+    def split_path(self, path):
         """
         You need to split the path into parts for both the add_handler
         and lookup functions, so it should be placed in a function here
         """
+        # if begins or ends with '/' they will be '' in the list
+        path_list = path.split('/')
+        # discard the empty strings
+        if path_list[0] == '':
+            path_list = path_list[1:]
+        if path_list[-1] == '':
+            path_list = path_list[:-1]
+        print("path_list:", path_list)
+        return path_list
 
 
 # ----------------------------------------------------------------------
