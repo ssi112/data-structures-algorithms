@@ -11,4 +11,5 @@ project2/*.zip
 project2/__pycache__
 wip
 project3/.ipynb_checkpoints
+project3/*.zip
 *.ods

@@ -12,22 +12,22 @@ block of code called a handler.
 
 
 """
+------------------------------------------------------------------------
 A RouteTrieNode will be similar to our autocomplete TrieNode...
 with one additional element, a handler.
 """
 class RouteTrieNode:
-    def __init__(self, handler = None): # self, handler = None, not_found = ""
+    def __init__(self, handler = None):
         # Initialize the node with children as before, plus a handler
         self.children = dict()
         self.handler = handler
-        #self.not_found = not_found if not_found is not "" or not_found is not None else "HTTP 404 Page Not Found"
 
     def insert(self, path, handler = None):
         # Insert the node as before
         self.children[path] = RouteTrieNode(handler)
-        #self.handler = handler
 
 
+# ----------------------------------------------------------------------
 # A RouteTrie will store our routes and their associated handlers
 class RouteTrie:
     def __init__(self, handler):
@@ -66,6 +66,7 @@ class RouteTrie:
         return node.handler
 
 
+# ----------------------------------------------------------------------
 # The Router class will wrap the Trie and handle
 class Router:
     def __init__(self, handler = None, not_found = None):
@@ -85,7 +86,6 @@ class Router:
         node = self.root
         path_list = self.split_path(path)
         node.insert(path_list, handler)
-        # node.not_found = handler if handler is not "" or handler is not None else "HTTP 404 Page Not Found"
 
     def lookup(self, path):
         """
@@ -96,7 +96,7 @@ class Router:
         e.g. /about and /about/ both return the /about handler
         """
         if path == "/":
-            return "got root!"
+            return "You Got Root!"
         node = self.root.root
         path_list = self.split_path(path)
         for path_part in path_list:
@@ -112,14 +112,13 @@ class Router:
         You need to split the path into parts for both the add_handler
         and lookup functions, so it should be placed in a function here
         """
-        # if begins or ends with '/' they will be '' in the list
+        # if begins or ends with '/' they will be '' in the split list
         path_list = path.split('/')
         # discard the empty strings
         if path_list[0] == '':
             path_list = path_list[1:]
         if path_list[-1] == '':
             path_list = path_list[:-1]
-        # print("path_list:", path_list)
         return path_list
 
 
@@ -137,7 +136,7 @@ router.add_handler("/home/about", "about handler")  # add a route
 router.add_handler("/home/contact", "contact us")  # add a route
 
 # should print 'root handler'
-print("root handler ('root handler'):", router.lookup("/"))
+print("\nroot handler ('root handler'):", router.lookup("/"))
 
 # should print 'not found handler' or None if you did not implement one
 print("/home ('not found handler' or None):", router.lookup("/home"))
@@ -154,12 +153,13 @@ print("/home/about/me ('not found handler' or None):", router.lookup("/home/abou
 print("/home/contact ('contact us'):", router.lookup("/home/contact/"))
 
 
+# another test...
 rout1 = Router("handle this", "")
 rout1.add_handler("/something", "something handler")
 rout1.add_handler("/something/somewhere", "somewhere handler")
 
-print()
-print("/home (not found):", rout1.lookup("/home"))
+print("\n/home (not found):", rout1.lookup("/home"))
 print("/something ('something handler'):", rout1.lookup("/something/"))
 print("/something/somewhere ('somewhere handler'):", rout1.lookup("/something/somewhere"))
+print()
 

@@ -97,13 +97,11 @@ Makes one pass through the list examining each element one time: O(n) with n bei
 ## Problem #7: HTTPRouter using a Trie
 
 ### Design
+The design follows how the problem is laid out. Three classes: a router trie node, a router trie and a router. Initially, I had it working without using the trie node, which I feel adds an extra layer that is not needed to solve this problem. On review of the requirements, however, I changed it to use all three classes. 
 
 ### Big O Space Complexity
-
+Splitting a string to store individual parts of the path is dependent on the length of the string and the depth or level of the path, which could be quite large on a site with many pages. In any case, using a dictionary should be O(n) where n is the count or number of components in the path.
 
 ### Big O Time Complexity
-
-
-
-
+Since we have to traverse the children to find the path and any handler we have O(n) worst case.
 
