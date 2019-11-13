@@ -1,9 +1,6 @@
 """
 graph_bfs_iteration.py
 
-This is here because Jupyter Notebook turned into a piece of crap and
-won't display any output. None of the so-called solutions found their
-searching work.
 """
 
 class GraphNode(object):
