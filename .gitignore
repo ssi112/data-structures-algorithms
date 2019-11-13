@@ -1,6 +1,6 @@
 # .gitignore
 *.pdf
-
+**/practice/.ipynb_checkpoints
 **/practice/graphs/.ipynb_checkpoints
 **/practice/maps_hashing/.ipynb_checkpoints
 #practice/.ipynb_checkpoints/*
