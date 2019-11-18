@@ -59,7 +59,24 @@ Course Outline
 * Graph Algorithms
 * Dynamic Programming
 * A-Star (A*) Algorithm 
-* Project 4 - Route Planner
+* Project 4 - Route Planner **
    * In this project, you will build a route-planning algorithm like the one used in Google Maps to calculate the shortest path between two points on a map. 
   
+
+#### ** Project 4 Notes:
+
+Project #4 notebook requires [plotly](https://plot.ly/python/getting-started/). However, trying to run the notebook locally resulted in this error:
+
+```
+ImportError: 
+The plotly.plotly module is deprecated,
+please install the chart-studio package and use the
+chart_studio.plotly module instead.
+```
+
+Also just changing `import plotly.plotly as py` in the helpers.py to `import chart_studio.plotly as py` does not work. 
+
+Throws an error `AttributeError: 'Graph' object has no attribute '_node'`
+
+
 
