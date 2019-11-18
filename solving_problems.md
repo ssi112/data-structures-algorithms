@@ -184,4 +184,57 @@ These are the problem solving steps used:
 
 **A correct working version is in tmp/daysBetweenDates.py**
 
+---
+
+## Problem Solving?
+
+#### When there are many choices or states the complexity comes from making the right choices.
+
+#### Example: route finding problem
+
+**Problem Definition**
+
+Initial State => s0
+
+Actions (s) : => {a1, a2, a33, ...}
+
+* A function that takes a state as input and returns a set of possible actions the agent can execute
+
+Result (s, a) => s'
+
+* Function that takes a state and action and delivers a new state as output
+
+Goal Test (s) => True | False
+
+* Function to take in a state and returns whether this state is a goal or not
+
+Path Cost (si => si+1 => si+2) => cost value (n) where i = 0,1,... j = 1,2,...
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aj &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; aj+1
+
+* A function which takes a path, a sequence of state, actions, transitions and returns a number, which is the cost of that path.
+
+Typically, the cost path is additive so the total cost of a path is just the sum of the individual steps. Implemented as a _step cost function_
+
+Step Cost (s, a, s') => n
+
+* Function that takes a state, action, and resulting state' of the action and returns a number that represents the _cost*_ of that action.
+
+&nbsp;&nbsp;&nbsp;&nbsp;_*Cost can be number of miles, time (hours/minutes), dollars, etc._
+
+**Route finding [video example](https://www.youtube.com/watch?time_continue=150&v=5lrkPKQwOFE&feature=emb_logo)**
+
+#### Uniform Cost Search
+
+**Uniform Cost search** - expands out equally in all directions, may expend additional effort getting to a fairly direct path to the goal.
+
+
+**Greedy best-first search** - expands outward toward locations estimated as closer to the goal. If a direct path is available, expends much less effort than Uniform Cost; however, it does not consider any routes in which it may need to temporarily take a further away path in order to arrive at an overall shorter path.
+
+
+**A* Search** - utilizes both of these - will try to optimize with both the shortest path and the goal in mind. We'll see how this works in the next video.
+
+
+
+
+
 
