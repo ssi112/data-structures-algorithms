@@ -78,5 +78,13 @@ Also just changing `import plotly.plotly as py` in the helpers.py to `import cha
 
 Throws an error `AttributeError: 'Graph' object has no attribute '_node'`
 
+**_Possible Solution_** 
+
+* https://stackoverflow.com/questions/49016596/networkx-digraph-attribute-error-self-succ/49016885#49016885
+
+**Additional Info:**
+
+* https://networkx.github.io/documentation/stable/release/migration_guide_from_1.x_to_2.0.html
+
 
 

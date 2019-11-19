@@ -15,9 +15,9 @@ def test(shortest_path_function):
             correct += 1
         else:
             print("For start:", start,
-                  "Goal:     ", goal,
+                  "     Goal:", goal,
                   "Your path:", path,
-                  "Correct:  ", answer_path)
+                  "  Correct:", answer_path)
     if correct == len(MAP_40_ANSWERS):
         print("All tests pass! Congratulations!")
     else:
