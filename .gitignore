@@ -10,6 +10,7 @@
 project1/*.zip
 project1/*.ods
 project1/.~*
+project1/__pycache__
 project2/*.zip
 project2/__pycache__
 wip
@@ -17,4 +18,5 @@ project3/.ipynb_checkpoints
 project3/*.zip
 project4/__pycache__
 **/project4/.ipynb_checkpoints
+project4/__pycache__
 *.ods

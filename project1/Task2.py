@@ -110,6 +110,8 @@ def main():
     elapsed_time = time.process_time() - time_start
     # print("\nElapsed time {:4.8f}".format(elapsed_time))
 
+    #print(single_longest_call())
+
 
 if __name__ == '__main__':
     main()
