@@ -85,11 +85,11 @@ def shortest_path(mapx, start, goal):
 def main():
     m40 = Map40()
     m10 = Map10()
-    #print("shortest_path(m10, 0, 2) = [0, 5, 3, 2]:", shortest_path(m10, 0, 2))
-    #print("shortest_path(m40, 5, 34) = [5, 16, 37, 12, 34]:", shortest_path(m40, 5, 34))
-    #print("shortest_path(m40, 8, 24) = [8, 14, 16, 37, 12, 17, 10, 24]", shortest_path(m40, 8, 24))
+    print("shortest_path(m10, 0, 2) = [0, 5, 3, 2]:", shortest_path(m10, 0, 2))
+    print("shortest_path(m40, 5, 34) = [5, 16, 37, 12, 34]:", shortest_path(m40, 5, 34))
+    print("shortest_path(m40, 8, 24) = [8, 14, 16, 37, 12, 17, 10, 24]", shortest_path(m40, 8, 24))
     print("shortest_path(m40, 5, 5) = [5]:", shortest_path(m40, 5, 5))
-    #print("shortest_path(m10, 6, 8) = None:", shortest_path(m10, 6, 8))
+    print("shortest_path(m10, 6, 8) = None:", shortest_path(m10, 6, 8))
 
 if __name__ == "__main__":
     main()
