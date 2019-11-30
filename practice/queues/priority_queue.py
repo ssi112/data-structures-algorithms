@@ -21,7 +21,6 @@ class QueueElement(object):
         self.element = element
         self.priority = priority
 
-
 class PriorityQueue(object):
     def __init__(self):
         self.queue = []
