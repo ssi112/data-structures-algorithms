@@ -4,7 +4,7 @@ a_star_shortest_path.py
 
 """
 import heapq
-from collections import defaultdict
+#from collections import defaultdict
 from math import sqrt
 from graph_data import *
 
@@ -25,7 +25,7 @@ the queue will remain sorted by priority
 
 class QueueElement(object):
     element = ""
-    priority = 0.0
+    priority = 0
 
     def __init__(self, element = None, priority = None):
         self.element = element
@@ -58,19 +58,12 @@ class PriorityQueue(object):
                 # priority then add it to the end of the queue
                 self.queue.append(queueElement)
 
-    def dequeue(self):
-        # remove & return highest priority item
-        return self.queue.pop(0)
-
     def removeLowestPriorityItem(self):
         # this will remove and return lowest priority item
         # used if size is fixed and space is needed
         lastItem = self.queue[-1]
         del self.queue[-1]
         return lastItem
-
-    def front(self):
-        return self.queue[0]
 
     def isEmpty(self):
         if len(self.queue) == 0:
@@ -110,44 +103,61 @@ def shortest_path(mapx, start, goal):
 
     # for node n, came_from[n] is node immediately preceding it on the
     # cheapest path from start to n currently known
-    came_from = defaultdict()
+    came_from = {}
     came_from[start] = None
 
     # node n, act_cost[n] is the cost of the cheapest path from start to
     # n that is currently known or distance between start to current.
 
     # for node n, total cost of the node, tot_cost[n] := act_cost[n] + h(n)
-    act_cost = defaultdict()
+    act_cost = {}
     act_cost[start] = 0 # math.inf # default value of infinity
     tot_cost = {}
 
     # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     heapq.heappush(open_set, (act_cost, start))
 
-    open_set_pq.enqueue(start, act_cost)
+    open_set_pq.enqueue(start, act_cost[start])
 
     while open_set_pq.size() > 0: # len(open_set) > 0:
         # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         act_cost, current = heapq.heappop(open_set)
         lowestRemoved = open_set_pq.removeLowestPriorityItem()
         current, act_cost[current] = lowestRemoved.element, lowestRemoved.priority
-        print("lowestRemoved", lowestRemoved.element, lowestRemoved.priority)
-        print("current, act_cost[current]", current, act_cost[current])
+        #print("lowestRemoved", lowestRemoved.element, lowestRemoved.priority)
+        #print("current, act_cost[current]", current, act_cost[current])
 
-        print("_"*55)
-        print("current, act_cost[current]", current, act_cost[current])
-        print("_"*55)
+        #print("_"*55)
+        #print("current, act_cost[current]", current, act_cost[current])
+        #print("_"*55)
         #break
 
         #print("act_cost={}  [---]  current={}".format(act_cost, current))
-
+        kpop = current
         if current == goal:
             best_path = []
             while current != start:
                 best_path.append(current)
                 current = came_from[current]
             best_path.append(start)
-            #print("open_set", open_set)
+            print("="*55)
+            print("open_set", open_set)
+            print("came_from", came_from)
+
+            path = []
+            for point in open_set:
+                print("point", point)
+                for set_point in point:
+                    print("set_point", set_point, type(set_point))
+                    #val = point.get(set_point, -99)
+                    try:
+                        for k,v in set_point.items():
+                            print("   =>", k, v)
+                            if kpop == k:
+                                path.append(k)
+                                print("path mofo ", path)
+                    except KeyError:
+                        pass
             return best_path[::-1]
 
         # keep searching in connected edges/roads
@@ -164,7 +174,7 @@ def shortest_path(mapx, start, goal):
                 tot_cost[road] = cost_val
                 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 #print("act_cost={}  [---]  cost_val={}".format(act_cost, cost_val))
-                #heapq.heappush(open_set, (tot_cost, road))
+                heapq.heappush(open_set, (tot_cost, road))
                 open_set_pq.enqueue(road, cost_val)
                 came_from[road] = current
     # open set is empty but goal was not found
