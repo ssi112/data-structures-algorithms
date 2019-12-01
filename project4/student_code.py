@@ -1,28 +1,63 @@
 """
 student_code.py
 
-References:
-  https://www.redblobgames.com/pathfinding/a-star/implementation.html
+Explanation & pseudocode
+  https://en.wikipedia.org/wiki/A*_search_algorithm
 
+Uses a min priority queue to keep track of the least
+cost/distance values of the paths to each point.
 """
 
-import heapq
-from collections import defaultdict
 from math import sqrt
+# below used to run from python command line
 from graph_data import *
 
-class PriorityQueue:
+# ----------------------------------------------------------------------
+class Queue_Element(object):
+    element = ""
+    priority = 0.0
+
+    def __init__(self, element = None, priority = None):
+        self.element = element
+        self.priority = priority
+
+
+class Min_Priority_Queue:
     def __init__(self):
-        self.elements = []
+        self.queue = []
 
-    def empty(self):
-        return len(self.elements) == 0
+    def is_empty(self):
+        return len(self.queue) == 0
 
-    def put(self, item, priority):
-        heapq.heappush(self.elements, (priority, item))
+    def enqueue(self, element, priority):
+        queue_element = Queue_Element(element, priority)
+        if self.is_empty():
+            # push the first item onto the queue
+            self.queue.append(queue_element)
+        else:
+            added = False
+            for inx, queueItem in enumerate(self.queue):
+                if queue_element.priority < queueItem.priority:
+                    # insert the new element one position before
+                    # respects other elements with same priority
+                    # but were added first
+                    # inx = index and where to insert new element
+                    self.queue.insert(inx, queue_element)
+                    added = True # stop searching
+                    break
+            if added == False:
+                # if no other elements are greater than this element's
+                # priority then add it to the end of the queue
+                self.queue.append(queue_element)
 
-    def get(self):
-        return heapq.heappop(self.elements)[1]
+    def dequeue(self):
+        # this will remove and return the first/lowest priority item
+        return self.queue.pop(0)
+
+    def __repr__(self):
+        return ''.join([str(inx) + ' - ' + str(queueItem.priority) + ' - ' +
+            str(queueItem.element) + '\n' for inx, queueItem in enumerate(self.queue)])
+
 
 # ----------------------------------------------------------------------
 def calc_distance(point_xy1, point_xy2):
@@ -36,11 +71,11 @@ def calc_distance(point_xy1, point_xy2):
 
 
 def shortest_path(mapx, start, goal):
-    # farthest points or paths already explored
-    frontier = PriorityQueue()
-    frontier.put(start, 0)
+    # farthest points or paths already explored a.k.a the frontier
+    open_set_pq = Min_Priority_Queue()
+    open_set_pq.enqueue(start, 0)
 
-    # points or paths prior to paths in the frontier
+    # points or paths prior to the paths in the frontier (open set)
     explored = {}
     explored[start] = None
 
@@ -56,8 +91,11 @@ def shortest_path(mapx, start, goal):
     cost_so_far = {}
     cost_so_far[start] = 0
 
-    while not frontier.empty():
-        current = frontier.get()
+    while not open_set_pq.is_empty():
+        lowestRemoved = open_set_pq.dequeue()
+        current, l_priority = lowestRemoved.element, lowestRemoved.priority
+        #print("*"*75)
+        #print("current={} || l_priority={}".format(current, l_priority))
 
         if current == goal:
             best_path = []
@@ -75,11 +113,13 @@ def shortest_path(mapx, start, goal):
             if next_road not in cost_so_far or g_score_possible < cost_so_far[next_road]:
                 # best path so far so record it
                 cost_so_far[next_road] = g_score_possible
-                # cost value used as minimum priority for the heapq (min heap)
+                # cost value used as minimum priority for the priority queue
                 cost_value = g_score_possible + calc_distance(mapx.intersections[next_road], mapx.intersections[goal])
-                frontier.put(next_road, cost_value)
+                # push this one onto the queue
+                open_set_pq.enqueue(next_road, cost_value)
+                #print("next_road={} | cost_value={}".format(next_road, cost_value))
                 explored[next_road] = current
-    # uh oh, frontier is empty but goal was not found
+    # uh oh, open_set_pq is empty but goal was not found
     return None
 
 def main():
