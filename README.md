@@ -87,4 +87,8 @@ Throws an error `AttributeError: 'Graph' object has no attribute '_node'`
 * https://networkx.github.io/documentation/stable/release/migration_guide_from_1.x_to_2.0.html
 
 
+## License
+
+The contents of this repository are covered under the [MIT License](mit_license.md)
+
 
