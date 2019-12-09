@@ -86,6 +86,8 @@ Throws an error `AttributeError: 'Graph' object has no attribute '_node'`
 
 * https://networkx.github.io/documentation/stable/release/migration_guide_from_1.x_to_2.0.html
 
+**UPDATE NOTE**
+It appears registration and an API key are required to use chart_studio.plotly.
 
 ## License
 
